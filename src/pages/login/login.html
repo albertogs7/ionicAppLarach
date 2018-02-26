@@ -1,4 +1,31 @@
-<ion-content padding>
-    <label>Bienvenido</label>
-    <h3>Movil Larach & Cia</h3>
+<ion-content>
+    <ion-grid>
+        <ion-row class="login">
+            <ion-col>
+                <h2 class="appTitle">Larach & Cia</h2>
+                <h4 class="appSubtitle">#1 en Ferreteria</h4>
+                <div class="logo"><img src="assets/imgs/castor.png"/></div>
+                <div class="appVersion">Versión 1.0</div>
+            </ion-col>
+        </ion-row>    
+        <ion-row padding>
+           <ion-col>
+                    <ion-list>
+                        <ion-item>
+                            <ion-label stacked>Usuario</ion-label>
+                            <ion-input type="text"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label stacked>Clave de acceso</ion-label>
+                            <ion-input type="password"></ion-input>
+                        </ion-item>    
+                    </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button full color="primary">Iniciar sesión</button>
+            </ion-col>
+        </ion-row>    
+    </ion-grid>
 </ion-content>
