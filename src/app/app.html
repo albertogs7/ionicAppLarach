@@ -1,7 +1,7 @@
 <ion-menu [content]="nav">        
     <ion-header>
         <ion-toolbar>                        
-            <ion-item no-lines class="menu-title">Menu<button *ngIf="!hideMenuBackButton" ion-button item-right><ion-icon name="arrow-back"></ion-icon></button></ion-item>
+            <ion-item no-lines class="menu-title">{{menuTitle}}<button *ngIf="!hideMenuBackButton" ion-button item-right (click)="upMenuLevel()"><ion-icon name="arrow-back"></ion-icon></button></ion-item>
         </ion-toolbar>
     </ion-header>   
     <ion-content class="toolbarContent">

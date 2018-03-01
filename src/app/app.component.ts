@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MainPage } from '../pages/main/main';
 import { HomePage } from '../pages/home/home';
-import { MenuItem } from '../components/menuItem';
+import { IMenuItem } from '../interfaces/menuItem';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,14 +14,34 @@ import { MenuItem } from '../components/menuItem';
 export class MyApp {
   @ViewChild('nav') nav:Nav;
   rootPage:any = MainPage;  
-  menuOptions:Array<{MenuItem}>;
-  currentMenu:Array<{MenuItem}>;
-  hideMenuBackButton:boolean=true;
+  menuOptions:IMenuItem[];
+  currentMenu:IMenuItem[];
+  menuTitle:string="Menu";
 
+  private parentMenu:any;//IMenuItem[][];
+  private hideMenuBackButton:boolean=true;
+  private menuLevel:number=0;
+  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    this.menuOptions=[{MenuItem(1,"General",HomePage,"home",null)},
-                      ];
+    let o:IMenuItem={id:1,title:"General",component:HomePage,icon:"home",children:null};
+
+    this.menuOptions=[
+                      {id:1,title:"General",component:HomePage,icon:"home",children:null},
+                      {id:2,title:"Ventas",component:HomePage,icon:"home",
+                        children:[
+                                  {id:11,title:"Cotización",component:HomePage,icon:"home",children:null},
+                                  {id:12,title:"Factura de clientes",component:HomePage,icon:"home",children:null}
+                                  ]
+                      },
+                      {id:3,title:"Inventarios",component:HomePage,icon:"home",
+                        children:[
+                                  {id:31,title:"Status de stock",component:HomePage,icon:"home",children:null},
+                                  {id:32,title:"Conteo de inventario",component:HomePage,icon:"home",children:null}
+                                  ]
+                      }
+                    ];
     this.currentMenu=this.menuOptions;
+    this.parentMenu=[];
 
     platform.ready().then(() => {      
       statusBar.styleDefault();
@@ -34,11 +54,25 @@ export class MyApp {
   }
 
   showChildren(parentId):void{
-    console.log('parentId:'+parentId);
+    this.parentMenu.push({title:this.menuTitle,menu:this.currentMenu});    
     let id=(this.currentMenu.findIndex(option=>(option.id===parentId)));
-    this.currentMenu=this.menuOptions[id].children;
-    console.log('index:'+id);
-    console.log(this.currentMenu);
+    this.menuTitle=this.currentMenu[id].title;
+    this.currentMenu=this.currentMenu[id].children;
+    this.menuLevel+=1;
+    this.hideMenuBackButton=false;    
+  }
+
+  upMenuLevel(){
+    console.log(this.menuLevel);
+    console.log(this.parentMenu[this.menuLevel-1]);
+    
+    this.currentMenu=this.parentMenu[this.menuLevel-1].menu;
+    this.menuTitle=this.parentMenu[this.menuLevel-1].title;
+    
+    this.parentMenu.pop();
+    this.menuLevel-=1;
+    if (this.menuLevel===0) this.hideMenuBackButton=true;
+    //  this.menuTitle="Menu";
   }
   /*
   toggleSection(i) {
