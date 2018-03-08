@@ -1,0 +1,65 @@
+side-menu{
+    #menu-title {    
+        color:color($colors,primary);
+        font-weight: bold;
+        background:transparent;    
+        button {
+            background: transparent;
+            box-shadow: none;
+            ion-icon{
+                font-size: 18pt;
+                color:color($colors,primary);        
+                font-weight: bold;
+            }
+            display: block;
+        }        
+    }
+    #user-data{
+        background:transparent;    
+        color:color($colors,primary);
+        text-align: center;
+        img{
+            width: 130px;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            padding: 3px;
+            border:1px solid white;            
+        }
+    }
+    #menu-content{
+        background-color: color($colors,primary);
+        button{
+            background-color: transparent;
+            color:White;
+        }
+        .accordion-list {
+            background: color($colors, light);
+            height: 100%;
+        }
+        .section {
+            background: #fff;
+            color: #000;
+            margin-bottom: 4px;
+        }
+        .section-active {
+            background: #ffc400;
+            color: #fff;
+        }
+        
+        .child {
+            background: #e8e7e6;
+            color: #000;
+            margin-bottom: 4px;
+        }
+        .child-item {
+            background: #f3f2f1;
+            padding: 10px;
+        }
+        .label {
+            margin: 0px;
+        }
+        .list {
+            margin-bottom: 4px;
+        }        
+    }
+}

@@ -1,0 +1,24 @@
+<ion-menu [content]="nav">        
+    <ion-header> 
+        <ion-toolbar>                        
+            <ion-item no-lines id="menu-title">
+              {{title}}
+              <button *ngIf="!hideMenuBackButton" ion-button item-right (click)="upMenuLevel()"><ion-icon name="arrow-back"></ion-icon></button>              
+            </ion-item>
+            <ion-item no-lines id="user-data">              
+                <img src="{{userData.imagePath}}" />
+                <h2>{{userData.name}}</h2>
+                <p>{{userData.email}}</p>                
+            </ion-item>
+        </ion-toolbar>
+    </ion-header>   
+    <ion-content id="menu-content">
+        <ion-list>
+            <div *ngFor="let page of currentMenu">
+                <button [@flyInOut] ion-item  *ngIf="page.children===null;else subMenuButton" menuClose><ion-icon item-left name="{{page.icon}}"></ion-icon>{{page.title}}</button>                
+                <ng-template #subMenuButton><button [@flyInOut] ion-item (click)="downMenuLevel(page.id)"><ion-icon item-left name="{{page.icon}}"></ion-icon>{{page.title}}<ion-icon item-right name="arrow-forward"></ion-icon></button></ng-template>
+            </div>
+        </ion-list>        
+    </ion-content>
+</ion-menu>
+<ion-nav #nav></ion-nav>

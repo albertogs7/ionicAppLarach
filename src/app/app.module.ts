@@ -11,10 +11,14 @@ import {DataService} from '../providers/dataservice';
 
 import { StatusBar } from '@ionic-native/status-bar';
 
+//Pages
 import { MyApp } from './app.component';
 import {LoginPage} from '../pages/login/login';
 import {MainPage} from '../pages/main/main';
 import { HomePage } from '../pages/home/home';
+
+//Components
+import { SideMenuComponent } from '../components/side-menu/side-menu';
 //import {Page2} from '../pages/page2/page2';
 
 @NgModule({
@@ -23,6 +27,7 @@ import { HomePage } from '../pages/home/home';
     LoginPage,
     HomePage,
     MainPage,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -37,19 +42,16 @@ import { HomePage } from '../pages/home/home';
     LoginPage,
     MainPage,
     HomePage,    
+    SideMenuComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    DataService,
+    DataService,        
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AppSettings,      
   ]
 })
 export class AppModule {
-  showSubMenu:boolean=false;
-
-  menuItemHandler():void{
-    this.showSubMenu=!this.showSubMenu;
-  }
+  
 }

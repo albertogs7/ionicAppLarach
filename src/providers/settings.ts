@@ -1,5 +1,6 @@
 import {Storage} from '@ionic/storage';
 import { Injectable } from '@angular/core';
+import { IMenuItem } from '../interfaces/app-interfaces';
 
 @Injectable()
 export class AppSettings{
@@ -12,5 +13,5 @@ export class AppSettings{
     public get(settingName:String){
         console.log(this.storage.get(`setting:${ settingName }`));
         return this.storage.get(`setting:${ settingName }`);
-      }
+      }    
 }
