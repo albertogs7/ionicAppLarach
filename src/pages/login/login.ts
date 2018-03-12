@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MainPage } from '../main/main';
+import { AppSettings } from '../../providers/settings';
 
 /**
  * Generated class for the LoginPage page.
@@ -17,7 +18,7 @@ import { MainPage } from '../main/main';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private splashScreen:SplashScreen) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private splashScreen:SplashScreen,public appSettings:AppSettings) {
   }
 
   ionViewDidLoad() {

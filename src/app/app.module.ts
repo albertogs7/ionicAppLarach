@@ -19,6 +19,9 @@ import { HomePage } from '../pages/home/home';
 
 //Components
 import { SideMenuComponent } from '../components/side-menu/side-menu';
+import { InvoicePage } from '../pages/invoice/invoice';
+import { InvoiceDetailsPage } from '../pages/invoice/invoice-details/invoice-details';
+import { InvoiceContentPage } from '../pages/invoice/invoice-content/invoice-content';
 //import {Page2} from '../pages/page2/page2';
 
 @NgModule({
@@ -27,7 +30,10 @@ import { SideMenuComponent } from '../components/side-menu/side-menu';
     LoginPage,
     HomePage,
     MainPage,
-    SideMenuComponent
+    SideMenuComponent,
+    InvoicePage,
+    InvoiceContentPage,
+    InvoiceDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -42,14 +48,18 @@ import { SideMenuComponent } from '../components/side-menu/side-menu';
     LoginPage,
     MainPage,
     HomePage,    
-    SideMenuComponent
+    SideMenuComponent,
+    InvoicePage,
+    InvoiceContentPage,
+    InvoiceDetailsPage
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
     DataService,        
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AppSettings,      
+    AppSettings,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},      
   ]
 })
 export class AppModule {

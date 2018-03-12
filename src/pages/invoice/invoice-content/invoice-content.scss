@@ -1,0 +1,21 @@
+page-invoice-content {
+
+    #totals-section{
+        p{
+            margin: 0;
+        }
+    }
+    
+    ion-footer{        
+        ion-toolbar{
+            ion-buttons{
+                color:color($colors,primary);
+                font-weight: bold;                 
+                button.total{
+                    flex-flow:column;                                   
+                    font-size:16pt;                                     
+                }
+            }
+        }
+    }
+}

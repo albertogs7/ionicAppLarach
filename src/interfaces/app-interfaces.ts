@@ -11,28 +11,22 @@ export interface IUserData{
     name:string;
     email:string;
     imagePath:string;
-    whsCode:string;
-    priceList:number;
     slpCode:number;
-
 }
 
-export interface IDocument{    
-    cardCode:string;
-    cardName:string;
-    RFC:string;
+export interface IDocuments{    
+    customer:ICustomers;
     numAtCard:string;
     docNum:number;
     docDate:Date;
     docDueDate:Date;
     slpCode:number;
-    comments:string;
     discPrcnt:number;
     discSum:number;    
     lines:IDocumentLines;
 }
 
-interface IDocumentLines{
+export interface IDocumentLines{
     visOrder:number;
     itemCode:string;
     itemName:string;
@@ -47,9 +41,14 @@ interface IDocumentLines{
     discSum:number;            
 }
 
-interface ICustomer{
+export interface ICustomers{
     cardCode:string;
     cardName:string;
     RFC:string;
-    address:string;
+    phone:string;
+    email:string;
+    street:string;
+    block:string;
+    state:string;
+    country:string;
 }
