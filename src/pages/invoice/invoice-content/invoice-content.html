@@ -16,12 +16,13 @@
         </ion-item>
     </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
+<ion-content>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <br>
     <ion-list>
         <ion-item-sliding *ngFor="let line of document.lines">
           <ion-item>              
-            <ion-avatar item-start><ion-icon name="cube"></ion-icon></ion-avatar>
+            <ion-avatar item-start style="margin:0px 10px 5px 0px"><ion-icon name="cube"></ion-icon></ion-avatar>
             <h3>{{line.itemName}}</h3>
             <p>{{line.itemCode}}</p>
           </ion-item>
@@ -52,7 +53,7 @@
       </ion-grid>
       <ion-buttons end style="text-align:center">
         TOTAL<br>
-        <button ion-button class="total" color="primary">{{document.docTotal}}</button>
+        <button ion-button class="total" style="color:White">{{document.docTotal}}</button>
       </ion-buttons>
   </ion-toolbar>
 </ion-footer>

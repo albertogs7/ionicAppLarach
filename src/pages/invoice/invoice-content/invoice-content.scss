@@ -1,5 +1,23 @@
 page-invoice-content {
-
+    ion-toolbar.toolbar.toolbar-md{
+        padding:0;
+    }
+    ion-label.label.label-md{
+        margin:0;
+    }
+    /*
+    ion-content{
+        ion-list{
+            ion-item-sliding{
+                ion-item{
+                    ion-avatar{
+                        margin: 0px 16px 0px;
+                        color:Red;
+                    }
+                }
+            }
+        }
+    }*/
     #totals-section{
         p{
             margin: 0;
@@ -8,11 +26,11 @@ page-invoice-content {
     
     ion-footer{        
         ion-toolbar{
-            ion-buttons{
-                color:color($colors,primary);
-                font-weight: bold;                 
-                button.total{
-                    flex-flow:column;                                   
+            ion-buttons{                
+                font-weight: bold;
+                background: color($colors,primary);
+                color:White;                
+                button.total{                                                                       
                     font-size:16pt;                                     
                 }
             }
