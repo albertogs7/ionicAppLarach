@@ -22,6 +22,7 @@ import { SideMenuComponent } from '../components/side-menu/side-menu';
 import { InvoicePage } from '../pages/invoice/invoice';
 import { InvoiceDetailsPage } from '../pages/invoice/invoice-details/invoice-details';
 import { InvoiceContentPage } from '../pages/invoice/invoice-content/invoice-content';
+import { ShareService } from '../providers/shareservice';
 //import {Page2} from '../pages/page2/page2';
 
 @NgModule({
@@ -59,6 +60,7 @@ import { InvoiceContentPage } from '../pages/invoice/invoice-content/invoice-con
     SplashScreen,
     DataService,        
     AppSettings,
+    ShareService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},      
   ]
 })

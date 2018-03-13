@@ -7,24 +7,41 @@
 <ion-header> 
     <ion-toolbar>                        
         <ion-item no-lines id="customer-section">
-            <ion-thumbnail item-start>
-              <!--<ion-icon name="person"></ion-icon>-->
-              <img src="assets/imgs/customer.png" />
-            </ion-thumbnail>
-            <h2>{{document.customer.cardName}}</h2>
-            <p>{{document.customer.cardCode}}</p>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-2>
+                    <img src="assets/imgs/customer.png" />
+                </ion-col>
+                <ion-col col-10>
+                    <h2>{{document.customer.cardName}}</h2>
+                    <p>{{document.customer.cardCode}}</p>
+                  </ion-col>
+              </ion-row>
+            </ion-grid>           
         </ion-item>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <br>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>    
     <ion-list>
         <ion-item-sliding *ngFor="let line of document.lines">
-          <ion-item>              
-            <ion-avatar item-start style="margin:0px 10px 5px 0px"><ion-icon name="cube"></ion-icon></ion-avatar>
-            <h3>{{line.itemName}}</h3>
-            <p>{{line.itemCode}}</p>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-1>
+                    <ion-icon name="cube"></ion-icon>
+                </ion-col>
+                <ion-col col-7>
+                  <p class="itemcode">{{line.itemCode}}</p>
+                  <p class="itemname">{{line.itemName}}</p>
+                  <p class="quantity">Cantidad: {{line.quantity | number:'1.2-2'}}</p>
+                </ion-col>
+                <ion-col col-4 text-right>
+                    <p class="price">Precio:{{line.price | currency:'L':'code'}}</p>
+                    <p class="linetotal">Total: {{line.lineTotal | currency:'L':'code'}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>                                      
           </ion-item>
           <ion-item-options side="right">
             <button ion-button color="primary"><ion-icon name="text"></ion-icon>Delete</button>
@@ -33,27 +50,18 @@
         </ion-item-sliding>
       </ion-list>
 </ion-content>
-<ion-footer>
-  <ion-toolbar color="light">
-      <ion-grid id="totals-section">
-        <ion-row>
-          <ion-col col-4>
-            <p>SubTotal</p>
-            <p>{{document.subTotal}}</p>              
-          </ion-col>
-          <ion-col col-4>
-            <p>Descuento</p>
-            <p>{{document.subTotal}}</p>              
-          </ion-col>
-          <ion-col col-4>
-            <p>Impuesto</p>
-            <p>{{document.subTotal}}</p>              
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-buttons end style="text-align:center">
-        TOTAL<br>
-        <button ion-button class="total" style="color:White">{{document.docTotal}}</button>
-      </ion-buttons>
-  </ion-toolbar>
+<ion-footer>  
+    <ion-grid style="padding:0">
+      <ion-row>
+        <ion-col col-3></ion-col>
+        <ion-col col-5 class="subtotals">            
+            Dscto: {{document.discSum | currency:'L':'code'}}<br>
+            Impto: {{document.taxSum | currency:'L':'code'}}
+        </ion-col>
+        <ion-col col-4 class="total">
+            TOTAL
+            <ion-row><button ion-button clear color="light" block class="total">{{document.docTotal | currency:'L':'code'}}</button></ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>        
 </ion-footer>

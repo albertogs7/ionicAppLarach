@@ -1,38 +1,54 @@
-page-invoice-content {
+page-invoice-content {    
+    #customer-section {         
+        img{
+            width: 40px;
+            height: 40px;
+            margin-right: 0px;
+            padding-right: 0px;
+        }
+    }
+
     ion-toolbar.toolbar.toolbar-md{
         padding:0;
     }
+
     ion-label.label.label-md{
         margin:0;
     }
-    /*
+    
     ion-content{
         ion-list{
             ion-item-sliding{
                 ion-item{
-                    ion-avatar{
-                        margin: 0px 16px 0px;
-                        color:Red;
+                    p.itemcode, p.quantity, p.price, p.linetotal{
+                        font-size: 9pt;                        
+                    }
+                    p.itemname{
+                        white-space: pre-wrap;
+                        color:color($colors,primary);
                     }
                 }
             }
         }
-    }*/
-    #totals-section{
-        p{
-            margin: 0;
-        }
     }
     
     ion-footer{        
-        ion-toolbar{
-            ion-buttons{                
-                font-weight: bold;
-                background: color($colors,primary);
-                color:White;                
-                button.total{                                                                       
-                    font-size:16pt;                                     
-                }
+        ion-grid{
+            background: color($colors,light);
+            ion-col.subtotals.col{                
+                //text-align: left;
+                font-weight: bold;                
+            }
+            ion-col.total.col{
+                padding:3px 0px 0px 0px;
+                background:color($colors,primary);
+                color:White;
+                text-align: center;                
+            }
+            button.total{                
+                margin:0;
+                padding:0;
+                font-size: 16pt;                
             }
         }
     }

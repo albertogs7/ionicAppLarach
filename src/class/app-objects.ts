@@ -34,8 +34,11 @@ export class Documents {
     docDate:Date;
     docDueDate:Date;
     slpCode:number;
+    groupNum:number;
+    priceList:number;    
     discPrcnt:number;
-    discSum:number;    
+    discSum:number; 
+    comments:string;   
     private _lines:Array<DocumentLines>;
 
     private _subTotal:number=0;

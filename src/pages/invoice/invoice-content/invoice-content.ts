@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Documents, DocumentLines } from '../../../class/app-objects';
 import { AppSettings } from '../../../providers/settings';
+import { ShareService } from '../../../providers/shareservice';
 
 /**
  * Generated class for the InvoiceContentPage page.
@@ -18,31 +19,8 @@ import { AppSettings } from '../../../providers/settings';
 export class InvoiceContentPage {
   document:Documents;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public appSettings:AppSettings) {
-    this.document=new Documents(appSettings);
-    this.document.customer.cardCode="C9999S02";
-    this.document.customer.cardName="CONSUMIDOR FINAL";
-
-    let line:DocumentLines=new DocumentLines(appSettings);
-    line.itemCode="13010001";
-    line.itemName="CEMENTO PIEDRA AZUL";
-    line.price=195;
-    line.taxPrcnt=15;
-    this.document.setLine(line);
-
-    line=new DocumentLines(appSettings);
-    line.itemCode="01010001";
-    line.itemName="AVELLANADOR";
-    line.price=100;
-    line.taxPrcnt=15;
-    this.document.setLine(line);
-
-    line=new DocumentLines(appSettings);
-    line.itemCode="120300007";
-    line.itemName="VARILLA DE 3/4";
-    line.price=180;
-    line.taxPrcnt=15;
-    this.document.setLine(line);
+  constructor(public navCtrl: NavController, public navParams: NavParams,private shareService:ShareService) {
+    this.document=shareService.invoice;
   }
 
   ionViewDidLoad() {
