@@ -23,6 +23,7 @@ import { InvoicePage } from '../pages/invoice/invoice';
 import { InvoiceDetailsPage } from '../pages/invoice/invoice-details/invoice-details';
 import { InvoiceContentPage } from '../pages/invoice/invoice-content/invoice-content';
 import { ShareService } from '../providers/shareservice';
+import { SelectSearchableModule } from 'ionic-select-searchable';
 //import {Page2} from '../pages/page2/page2';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ShareService } from '../providers/shareservice';
     BrowserAnimationsModule, 
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    SelectSearchableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
