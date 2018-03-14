@@ -30,8 +30,8 @@
           <ion-option value="snes">SNES</ion-option>
         </ion-select>
     </ion-item>
-    <ion-item>
-        
+  <!--    
+    <ion-item>    
         <select-searchable 
            title="Vendedor"    
             [(ngModel)]="docHeader.slpCode"
@@ -39,7 +39,12 @@
             itemValueField="slpCode"
             itemTextField="slpName"
             [canSearch]="true"
-            (onChange)="salesPersonChange($event)"></select-searchable>
+            (onChange)="salesPersonChange($event)"></select-searchable>      
+    </ion-item>
+    -->    
+    <select-searchable title="Hola mundo"></select-searchable>
+    <ion-item>
+      <button ion-button color="primary" (click)="gotoClick($event)">Haga click</button>  
     </ion-item>
     <ion-item>
         <ion-label stacked>Comentarios</ion-label>

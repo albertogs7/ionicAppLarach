@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Documents } from '../../../class/app-objects';
 import { ShareService } from '../../../providers/shareservice';
-import {SelectSearchable} from 'ionic-select-searchable';
+//import {SelectSearchable} from 'ionic-select-searchable';
 //import { SelectSearchable } from 'ionic-select-searchable/select-searchable.component';
 
 /**
@@ -36,11 +36,12 @@ export class InvoiceDetailsPage {
                       ];
   }
 
-  salesPersonChange(event: { component: SelectSearchable, value: any }) {
-    console.log('port:', event.value);
-}
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvoiceDetailsPage');
   }
 
+  gotoClick(event:any){
+    event.preventDefault();
+    console.log('clickdetenido');
+  }
 }

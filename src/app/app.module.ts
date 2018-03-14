@@ -23,7 +23,8 @@ import { InvoicePage } from '../pages/invoice/invoice';
 import { InvoiceDetailsPage } from '../pages/invoice/invoice-details/invoice-details';
 import { InvoiceContentPage } from '../pages/invoice/invoice-content/invoice-content';
 import { ShareService } from '../providers/shareservice';
-import { SelectSearchableModule } from 'ionic-select-searchable';
+import { SelectSearchableModule } from '../components/select-searchable/select-searchable.module';
+//import { SelectSearchablePage } from '../components/select-searchable/select-searchable-page/select-searchable';
 //import {Page2} from '../pages/page2/page2';
 
 @NgModule({
@@ -32,7 +33,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     LoginPage,
     HomePage,
     MainPage,
-    SideMenuComponent,
+    SideMenuComponent,    
     InvoicePage,
     InvoiceContentPage,
     InvoiceDetailsPage
@@ -41,9 +42,10 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     BrowserModule,
     BrowserAnimationsModule, 
     HttpModule,
+    SelectSearchableModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    SelectSearchableModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,12 +53,12 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     LoginPage,
     MainPage,
     HomePage,    
-    SideMenuComponent,
+    SideMenuComponent,    
     InvoicePage,
     InvoiceContentPage,
     InvoiceDetailsPage
-
   ],
+  
   providers: [
     StatusBar,
     SplashScreen,
