@@ -1,6 +1,6 @@
 import { Component,Input} from '@angular/core';
 
-import { SelectSearchablePage } from './select-searchable-page/select-searchable';
+import { SelectSearchablePage } from './select-searchable-page/select-searchable-page';
 import { NavController, NavParams } from 'ionic-angular';
 //import { SelectSearchablePage } from './select-searchable-page/select-searchable-page';
 
@@ -12,33 +12,31 @@ import { NavController, NavParams } from 'ionic-angular';
  */
 @Component({
   selector: 'select-searchable',  
-  templateUrl: 'select-searchable.html'
+  templateUrl: 'select-searchable.html'  
   //template:'<ion-input type="text" [(ngModel)]="selectContent"></ion-input>',
 })
 /*
 @Directive({
   selector: "[click-stop-propagation]"
 })*/
-export class SelectSearchableComponent {
-
+export class SelectSearchableComponent {  
   @Input() title:string="";
-  @Input() itemList:Array<{id:any,name:string}>
-  @Input() labelStyle:string="";
-  @Input() infinityScrollbar:boolean=false;
+  @Input() itemList:Array<{id:any,name:string}>;
+  selectedItem:{id:any,name:string}={id:1,name:"Ningun empleado del departamento"};
 
-  selectContent:string="Hola mundo";
-  constructor(public navCrtl:NavController,public navParams:NavParams) {
-    //console.log(elementRef.nativeElement);
-    //console.log('Hello SelectSearchableComponent Component');    
+  selectedItemCB=(_params)=>{
+    return new Promise((resolve,reject)=>{
+      this.selectedItem=_params;
+      resolve();
+    })
   }
-  
-  //@HostListener("click", ["$event"])1
-  goToList(event:any):void{
-    event.preventDefault();
-    event.stopPropagation();
-    //event.stopPropagation();
-    console.log('goToList presionado');
-    this.navCrtl.push(SelectSearchablePage);
+
+  constructor(public navCrtl:NavController,public navParams:NavParams) {
+    
+  }
+  //@HostListener("click", ["$event"])1  
+  goToList(event:any){  
+    this.navCrtl.push(SelectSearchablePage,{title:this.title,itemList:this.itemList,callback:this.selectedItemCB});        
   }
   
 }

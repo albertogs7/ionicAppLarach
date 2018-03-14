@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SideMenuComponent } from './side-menu/side-menu';
 import { SelectSearchableComponent } from './select-searchable/select-searchable';
-import { SelectSearchablePage } from './select-searchable/select-searchable-page/select-searchable';
+import { SelectSearchablePage } from './select-searchable/select-searchable-page/select-searchable-page';
 import { IonicPageModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { SelectSearchableModule } from './select-searchable/select-searchable.module';

@@ -27,22 +27,13 @@
           <ion-option value="ps">PlayStation</ion-option>
           <ion-option value="genesis">Sega Genesis</ion-option>
           <ion-option value="saturn">Sega Saturn</ion-option>
-          <ion-option value="snes">SNES</ion-option>
+          <ion-option value="snes">SNES</ion-option>          
         </ion-select>
     </ion-item>
-  <!--    
-    <ion-item>    
-        <select-searchable 
-           title="Vendedor"    
-            [(ngModel)]="docHeader.slpCode"
-            [items]="salesPersons"
-            itemValueField="slpCode"
-            itemTextField="slpName"
-            [canSearch]="true"
-            (onChange)="salesPersonChange($event)"></select-searchable>      
-    </ion-item>
-    -->    
-    <select-searchable title="Hola mundo"></select-searchable>
+    <select-searchable title="Vendedor" 
+                       [itemList]="salesPersons"
+                       >
+    </select-searchable>
     <ion-item>
       <button ion-button color="primary" (click)="gotoClick($event)">Haga click</button>  
     </ion-item>

@@ -19,7 +19,7 @@ import { ShareService } from '../../../providers/shareservice';
 })
 export class InvoiceDetailsPage {
   docHeader;
-  salesPersons:Array<{slpCode:number,slpName:string}>
+  salesPersons:Array<{id:number,name:string}>
   constructor(public navCtrl: NavController, public navParams: NavParams, private shareService:ShareService) {
     this.docHeader={docDate:shareService.invoice.docDate,
                     priceList:shareService.invoice.priceList,
@@ -27,12 +27,12 @@ export class InvoiceDetailsPage {
                     groupNum:shareService.invoice.groupNum,
                     comments:shareService.invoice.comments,      
                     }
-    this.salesPersons=[{slpCode:-1,slpName:"Ningun empleado del departamento"},
-                       {slpCode:1,slpName:"Junior Perez"},
-                       {slpCode:2,slpName:"Yamileza Gonzales"},
-                       {slpCode:3,slpName:"Jose Arturo Flores"},
-                       {slpCode:4,slpName:"Carlos Pineda Chacon"},
-                       {slpCode:5,slpName:"Maritza Nohemi Colindres"},
+    this.salesPersons=[{id:-1,name:"--Ningun empleado del departamento"},
+                       {id:1,name:"Junior Perez"},
+                       {id:2,name:"Yamileza Gonzales"},
+                       {id:3,name:"Jose Arturo Flores"},
+                       {id:4,name:"Carlos Pineda Chacon"},
+                       {id:5,name:"Maritza Nohemi Colindres"},
                       ];
   }
 
