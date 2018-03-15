@@ -36,7 +36,7 @@ export class SelectSearchablePage {
 
   ionViewDidLoad() {
     this.filterItems();
-    this.searchControl.valueChanges.distinctUntilChanged().debounceTime(500).subscribe(search => { 
+    this.searchControl.valueChanges.distinctUntilChanged().debounceTime(700).subscribe(search => { 
       this.searching = false;    
       this.filterItems();
     });    
