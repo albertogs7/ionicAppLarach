@@ -21,12 +21,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })*/
 export class SelectSearchableComponent {  
   @Input() title:string="";
-  @Input() itemList:Array<{id:any,name:string}>;
-  selectedItem:{id:any,name:string}={id:1,name:"Ningun empleado del departamento"};
+  @Input() itemValue:string="id";
+  @Input() itemDescription:string="name";
+  @Input() itemList:Array<any>;
+  selectedItem:any=null;
 
   selectedItemCB=(_params)=>{
     return new Promise((resolve,reject)=>{
-      this.selectedItem=_params;
+      this.selectedItem=_params;      
       resolve();
     })
   }
@@ -34,9 +36,9 @@ export class SelectSearchableComponent {
   constructor(public navCrtl:NavController,public navParams:NavParams) {
     
   }
-  //@HostListener("click", ["$event"])1  
+
   goToList(event:any){  
-    this.navCrtl.push(SelectSearchablePage,{title:this.title,itemList:this.itemList,callback:this.selectedItemCB});        
+    this.navCrtl.push(SelectSearchablePage,{title:this.title,itemList:this.itemList,itemValue:this.itemValue,itemDescription:this.itemDescription,callback:this.selectedItemCB});        
   }
   
 }

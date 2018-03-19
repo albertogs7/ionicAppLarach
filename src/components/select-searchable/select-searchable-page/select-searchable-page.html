@@ -11,11 +11,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar [formControl]="searchControl" [(ngModel)]="searchText" (ionInput)="onSearchInput()"></ion-searchbar>
+  <!--<ion-searchbar #eSearchBox [formControl]="searchBox" [(ngModel)]="searchText" (ionInput)="onSearchInput()"></ion-searchbar>-->
+  <ion-searchbar #searchBox (input)="searching=true;searchTerm$.next($event.target.value)"></ion-searchbar>
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
   <ion-list>
-      <button ion-item (click)="returnItem(item)" *ngFor="let item of items">{{item.name}}</button>
+      <button ion-item (click)="returnItem(item)" *ngFor="let item of items">{{item[itemDescription]}}</button>
   </ion-list>
 </ion-content>

@@ -1,6 +1,6 @@
 <!-- Generated template for the SelectSearchableComponent component -->
 <button ion-item detail-none (click)="goToList($event)">            
     <ion-label stacked style="color:#999">{{title}}</ion-label>
-    <ion-label style="margin-top:5px;padding-bottom:2px">{{selectedItem.name}}</ion-label>    
+    <ion-label style="margin-top:3px;padding-bottom:2px">{{selectedItem==null ? '&nbsp;': selectedItem[itemDescription]}}</ion-label>    
     <div class="caret" item-right></div>
 </button>
