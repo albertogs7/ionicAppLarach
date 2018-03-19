@@ -34,6 +34,8 @@
                        itemValue="slpCode"
                        itemDescription="slpName"
                        [itemList]="salesPersons"
+                       [currentItem]="{slpCode:docHeader.slpCode,slpName:'--Ningun empleado del departamento'}"
+                       (selectedItem)="docHeader.slpCode=$event.slpCode"                
                        >
     </select-searchable>
     <ion-item>

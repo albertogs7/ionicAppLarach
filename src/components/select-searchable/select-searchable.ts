@@ -1,7 +1,8 @@
-import { Component,Input} from '@angular/core';
+import { Component,Input,Output,EventEmitter,AfterViewInit} from '@angular/core';
 
 import { SelectSearchablePage } from './select-searchable-page/select-searchable-page';
 import { NavController, NavParams } from 'ionic-angular';
+
 //import { SelectSearchablePage } from './select-searchable-page/select-searchable-page';
 
 /**
@@ -19,22 +20,35 @@ import { NavController, NavParams } from 'ionic-angular';
 @Directive({
   selector: "[click-stop-propagation]"
 })*/
-export class SelectSearchableComponent {  
+export class SelectSearchableComponent implements AfterViewInit{  
   @Input() title:string="";
   @Input() itemValue:string="id";
   @Input() itemDescription:string="name";
   @Input() itemList:Array<any>;
-  selectedItem:any=null;
+  @Output() selectedItem=new EventEmitter;
+  @Input() currentItem=null;
 
   selectedItemCB=(_params)=>{
     return new Promise((resolve,reject)=>{
-      this.selectedItem=_params;      
+      console.log(_params);
+      this.currentItem=_params;
+      this.selectedItem.emit({selectedItem:_params});      
       resolve();
     })
   }
 
   constructor(public navCrtl:NavController,public navParams:NavParams) {
-    
+   
+  }
+
+  ngAfterViewInit(){
+    console.log('currentItem');
+    console.log(this.currentItem); 
+  }
+
+  ionViewDidEnter(){
+    console.log('currentItem');
+    console.log(this.currentItem);
   }
 
   goToList(event:any){  
