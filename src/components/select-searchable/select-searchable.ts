@@ -29,8 +29,7 @@ export class SelectSearchableComponent implements AfterViewInit{
   @Input() currentItem=null;
 
   selectedItemCB=(_params)=>{
-    return new Promise((resolve,reject)=>{
-      console.log(_params);
+    return new Promise((resolve,reject)=>{      
       this.currentItem=_params;
       this.selectedItem.emit({selectedItem:_params});      
       resolve();

@@ -8,8 +8,9 @@ export class ShareService{
     invoice:Documents;
     salesPersons:Array<ISelectList>;
     pricesList:Array<ISelectList>;
-    paymentTerms:Array<ISelectList>;
+    paymentTerms:Array<ISelectList>;    
     wareHouses:Array<string>;
+    countries:Array<{id:string,name:string}>;
     terminalConfig:ITerminalConfig;
 
     constructor(private appSettings:AppSettings){
@@ -47,11 +48,16 @@ export class ShareService{
                         "B3TGU",
                         "B5TGU",
                         "B6TGU"];                        
-
+        this.countries=[{id:"HN",name:"Honduras"},
+                        {id:"GT",name:"Guatemala"},
+                        {id:"ES",name:"El Salvador"},
+                        {id:"CR",name:"Costa Rica"},
+                        {id:"NC",name:"Nicaragua"}];
+                        
         this.terminalConfig={
             store:{id:"S02",name:"SALA #2"},
             customer:{cardCode:"C9999S02",cardName:"CONSUMIDOR FINAL",
-                      RFC:"000000000000",groupNum:1,phone:"",email:"sistemas@larachycia.com",street:"",block:"Col. Miramontes",state:"Tegucigalpa",country:"HN"},
+                      RFC:"000000000000",groupNum:1,phone:"",email:"sistemas@larachycia.com",state:"Tegucigalpa",country:"HN",address:"Col. Miramontes, Calle la Salud",imagePath:"assets/imgs/customer.png"},
             salesPerson:{id:-1,name:"--Ningun empleado del departamento"},
             wareHouse:{id:"S2TGU",name:"Sala 2 Tegucigalpa"},
             priceList:{id:2,name:"02-Precios Detalle sin ISV"},

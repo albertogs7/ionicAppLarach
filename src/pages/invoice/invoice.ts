@@ -27,8 +27,6 @@ export class InvoicePage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public appSettings:AppSettings,shareService:ShareService) {
     shareService.invoice=new Documents(appSettings,shareService);
-    //shareService.invoice.customer.cardCode="C9999S02";
-    //shareService.invoice.customer.cardName="CONSUMIDOR FINAL";
 
     let line:DocumentLines=new DocumentLines(appSettings);
     line.itemCode="13010001";

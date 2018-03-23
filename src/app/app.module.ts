@@ -24,6 +24,8 @@ import { InvoiceDetailsPage } from '../pages/invoice/invoice-details/invoice-det
 import { InvoiceContentPage } from '../pages/invoice/invoice-content/invoice-content';
 import { ShareService } from '../providers/shareservice';
 import { SelectSearchableModule } from '../components/select-searchable/select-searchable.module';
+import { InvoiceCustomerPage } from '../pages/invoice/invoice-customer/invoice-customer';
+import { InvoiceItemPage } from '../pages/invoice/invoice-item/invoice-item';
 //import { SelectSearchablePage } from '../components/select-searchable/select-searchable-page/select-searchable';
 //import {Page2} from '../pages/page2/page2';
 
@@ -36,7 +38,10 @@ import { SelectSearchableModule } from '../components/select-searchable/select-s
     SideMenuComponent,    
     InvoicePage,
     InvoiceContentPage,
-    InvoiceDetailsPage
+    InvoiceDetailsPage,
+    InvoiceCustomerPage,
+    InvoiceItemPage
+
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,9 @@ import { SelectSearchableModule } from '../components/select-searchable/select-s
     SideMenuComponent,    
     InvoicePage,
     InvoiceContentPage,
-    InvoiceDetailsPage
+    InvoiceDetailsPage,
+    InvoiceCustomerPage,
+    InvoiceItemPage
   ],
   
   providers: [

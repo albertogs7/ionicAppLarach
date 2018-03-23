@@ -47,11 +47,11 @@ export interface ICustomers{
     RFC:string;
     groupNum:number;
     phone:string;
-    email:string;
-    street:string;
-    block:string;
-    state:string;
+    email:string;        
     country:string;
+    state:string;
+    address:string;
+    imagePath:string;
 }
 
 export interface ITerminalConfig{

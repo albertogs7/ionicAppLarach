@@ -13,7 +13,7 @@
                     <img src="assets/imgs/customer.png" />
                 </ion-col>
                 <ion-col col-10>
-                    <button ion-button clear>
+                    <button ion-button clear (click)="customerDetails()">
                       <h2>{{document.customer.cardName}}</h2>
                       <h5>{{document.customer.cardCode}}</h5>
                     </button>                    

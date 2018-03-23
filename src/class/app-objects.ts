@@ -121,7 +121,7 @@ export class DocumentLines {
         return (this._taxPrcnt-1)*100;
     }
 
-    set taxPrcnt(value:number){
+    set taxPrcnt(value:number){        
         this._taxPrcnt=(value/100)+1;
     }
 
@@ -129,8 +129,8 @@ export class DocumentLines {
         return this.appSettings.round(this.priceAfterDisc*this._taxPrcnt*(this.quantity*this.numPerMsr),DecimalType.PERCENTS);
     }
 
-    get lineTotal():number{
-        return this.appSettings.round((this.quantity*this.numPerMsr*this.priceAfterDisc)+this.taxSum,DecimalType.TOTALS);
+    get lineTotal():number{        
+        return this.appSettings.round(this.quantity*this.numPerMsr*this.priceAfterDisc*this._taxPrcnt,DecimalType.TOTALS);
     }
 
     get lineTotalBefTax():number{

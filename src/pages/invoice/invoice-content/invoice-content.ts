@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Documents, DocumentLines } from '../../../class/app-objects';
 import { AppSettings } from '../../../providers/settings';
 import { ShareService } from '../../../providers/shareservice';
+import { InvoiceCustomerPage } from '../invoice-customer/invoice-customer';
 
 /**
  * Generated class for the InvoiceContentPage page.
@@ -24,7 +25,10 @@ export class InvoiceContentPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvoiceContentPage');
+    
   }
 
+  customerDetails(){
+    this.navCtrl.push(InvoiceCustomerPage);
+  }
 }

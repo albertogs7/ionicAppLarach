@@ -27,8 +27,7 @@ page-invoice-content {
                 ion-item{
                     ion-fab{
                         position: relative;
-                        display: inline-block;
-                        
+                        display: inline-block;                        
                     }
                     
                     ion-fab-list{
@@ -51,6 +50,7 @@ page-invoice-content {
                         color:color($colors,primary);                        
                         box-shadow: none;
                         border-radius: 2px;
+                        font-size: 10pt;
                     }
 
                     p.itemcode, p.quantity, p.price, p.linetotal{

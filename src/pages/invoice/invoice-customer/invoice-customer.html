@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>                            
+    </ion-navbar>    
+    <ion-item no-lines class="content-header">              
+        <img src="{{customer.imagePath}}" />
+        <h3>Detalles del cliente</h3>
+    </ion-item>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+          <ion-label stacked>Codigo</ion-label>
+          <ion-label>{{shareService.invoice.customer.cardCode}}</ion-label>          
+          <button ion-button outline item-end>Cambiar</button>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Nombre</ion-label>
+          <ion-input type="text" [(ngModel)]="customer.cardName"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>RFC</ion-label>
+          <ion-input type="text" [(ngModel)]="customer.RFC"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Telefono</ion-label>
+          <ion-input type="text" [(ngModel)]="customer.phone"></ion-input>
+      </ion-item>      
+      <ion-item>
+          <ion-label stacked>Correo</ion-label>
+          <ion-input type="text" [(ngModel)]="customer.email"></ion-input>
+      </ion-item>      
+      <select-searchable title="Paises" 
+                       itemValue="id"
+                       itemDescription="name"
+                       [itemList]="shareService.countries"
+                       [currentItem]="country"                       
+                       (selectedItem)="customer.country=$event.id"
+                       >
+    </select-searchable>
+      <ion-item>
+          <ion-label stacked>Estado</ion-label>
+          <ion-input type="text" [(ngModel)]="customer.state"></ion-input>
+      </ion-item>      
+      <ion-item>
+          <ion-label stacked>Dirección</ion-label>
+          <ion-input type="text" [(ngModel)]="customer.address"></ion-input>
+      </ion-item>                  
+    </ion-list>  
+  </ion-content>
+  
