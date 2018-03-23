@@ -6,15 +6,17 @@
 -->
 <ion-header> 
     <ion-toolbar>                        
-        <ion-item no-lines id="customer-section">
+        <ion-item no-lines>
             <ion-grid>
               <ion-row>
                 <ion-col col-2>
                     <img src="assets/imgs/customer.png" />
                 </ion-col>
                 <ion-col col-10>
-                    <h2>{{document.customer.cardName}}</h2>
-                    <p>{{document.customer.cardCode}}</p>
+                    <button ion-button clear>
+                      <h2>{{document.customer.cardName}}</h2>
+                      <h5>{{document.customer.cardCode}}</h5>
+                    </button>                    
                   </ion-col>
               </ion-row>
             </ion-grid>           
@@ -34,7 +36,13 @@
                 <ion-col col-7>
                   <p class="itemcode">{{line.itemCode}}</p>
                   <p class="itemname">{{line.itemName}}</p>
-                  <p class="quantity">Cantidad: {{line.quantity | number:'1.2-2'}}</p>
+                  <p class="quantity">Cantidad                       
+                    <ion-fab>
+                      <button ion-fab mini> {{line.quantity | number:'1.0-0'}}</button>
+                      <ion-fab-list side="right"><button ion-fab color="primary">+1</button></ion-fab-list>
+                      <ion-fab-list side="left"><button ion-fab color="primary">-1</button></ion-fab-list>
+                    </ion-fab>                                                          
+                  </p>                  
                 </ion-col>
                 <ion-col col-4 text-right>
                     <p class="price">Precio:{{line.price | currency:'L':'code'}}</p>

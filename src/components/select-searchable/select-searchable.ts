@@ -42,13 +42,11 @@ export class SelectSearchableComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(){
-    console.log('currentItem');
-    console.log(this.currentItem); 
+    
   }
 
   ionViewDidEnter(){
-    console.log('currentItem');
-    console.log(this.currentItem);
+    
   }
 
   goToList(event:any){  

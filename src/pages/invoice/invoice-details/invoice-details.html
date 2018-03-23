@@ -5,45 +5,43 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Cabecera del documento</ion-title>
+  <ion-navbar>        
+    <ion-item no-lines class="content-header">              
+        <ion-icon name="document"></ion-icon>        
+        <h3>Cabecera del documento</h3>
+    </ion-item>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-list>
     <ion-item>
         <ion-label stacked>Fecha</ion-label>
-        <ion-input type="text" [(ngModel)]="docHeader.docDate"></ion-input>
+        <ion-input type="text" disabled [ngModel]="docHeader.docDate | date:'dd/MM/yyyy'" (ngModel)="docHeader.docDate"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label stacked>Lista de precios</ion-label>
-        <ion-input type="text" [(ngModel)]="docHeader.priceList"></ion-input>
+        <ion-input type="text" disabled [(ngModel)]="docHeader.listName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Condicion de pago</ion-label>
       <ion-select [(ngModel)]="docHeader.groupNum">
-          <ion-option value="nes">NES</ion-option>
-          <ion-option value="n64">Nintendo64</ion-option>
-          <ion-option value="ps">PlayStation</ion-option>
-          <ion-option value="genesis">Sega Genesis</ion-option>
-          <ion-option value="saturn">Sega Saturn</ion-option>
-          <ion-option value="snes">SNES</ion-option>          
+          <ion-option *ngFor="let item of shareService.paymentTerms" [value]="item.id">{{item.name}}</ion-option>          
         </ion-select>
     </ion-item>
     <select-searchable title="Vendedor" 
-                       itemValue="slpCode"
-                       itemDescription="slpName"
-                       [itemList]="salesPersons"
-                       [currentItem]="{slpCode:docHeader.slpCode,slpName:'--Ningun empleado del departamento'}"
-                       (selectedItem)="docHeader.slpCode=$event.slpCode"                
+                       itemValue="id"
+                       itemDescription="name"
+                       [itemList]="shareService.salesPersons"
+                       [currentItem]="docHeader.salesPerson"                       
                        >
-    </select-searchable>
+    </select-searchable>    
     <ion-item>
-      <button ion-button color="primary" (click)="gotoClick($event)">Haga click</button>  
+        <ion-label stacked>Dirección</ion-label>
+        <ion-textarea type="text" [(ngModel)]="docHeader.address"></ion-textarea>
     </ion-item>
     <ion-item>
         <ion-label stacked>Comentarios</ion-label>
-        <ion-input type="text" [(ngModel)]="docHeader.comments"></ion-input>
+        <ion-textarea type="text" [(ngModel)]="docHeader.comments"></ion-textarea>
     </ion-item>
   </ion-list>  
 </ion-content>

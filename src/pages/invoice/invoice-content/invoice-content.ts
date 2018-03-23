@@ -20,7 +20,7 @@ export class InvoiceContentPage {
   document:Documents;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private shareService:ShareService) {
-    this.document=shareService.invoice;
+    this.document=shareService.invoice;    
   }
 
   ionViewDidLoad() {

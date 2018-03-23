@@ -2,6 +2,7 @@ import {IDocuments,ICustomers,IDocumentLines} from '../interfaces/app-interfaces
 import {AppSettings} from '../providers/settings';
 import { DecimalType } from './app-enums';
 import { PROP_METADATA } from '@angular/core/src/util/decorators';
+import { ShareService } from '../providers/shareservice';
 
 enum Property{
     TAXPERCENT,
@@ -9,18 +10,6 @@ enum Property{
     DISCSUM,
     PRICE,
     QUANTITY,
-}
-
-export class Customers implements ICustomers{
-    cardCode:string;
-    cardName:string;
-    RFC:string;
-    phone:string;
-    email:string;
-    street:string;
-    block:string;
-    state:string;
-    country:string;
 }
 
 export class Documents {
@@ -38,16 +27,21 @@ export class Documents {
     priceList:number;    
     discPrcnt:number;
     discSum:number; 
+    address:string; 
     comments:string;   
+    
     private _lines:Array<DocumentLines>;
-
     private _subTotal:number=0;
     private _taxSum:number=0;
     private _docTotal:number=0;
-    
+    private _paidSum:number=0;
 
-    constructor(public appSettings:AppSettings){
-        this.customer=new Customers();
+    constructor(public appSettings:AppSettings,private shareService:ShareService){
+        this.customer=shareService.terminalConfig.customer;        
+        this.slpCode=shareService.terminalConfig.salesPerson.id;
+        this.priceList=shareService.terminalConfig.priceList.id;
+        this.groupNum=shareService.terminalConfig.customer.groupNum;
+        this.docDate=new Date();
         this._lines=[];
     }
 
@@ -108,6 +102,7 @@ export class DocumentLines {
     
    
     constructor(public appSettings:AppSettings){
+        
     }
 
     get discPrcnt():number{

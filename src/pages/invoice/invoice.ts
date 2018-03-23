@@ -26,15 +26,16 @@ export class InvoicePage {
   tab3;  
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public appSettings:AppSettings,shareService:ShareService) {
-    shareService.invoice=new Documents(appSettings);
-    shareService.invoice.customer.cardCode="C9999S02";
-    shareService.invoice.customer.cardName="CONSUMIDOR FINAL";
+    shareService.invoice=new Documents(appSettings,shareService);
+    //shareService.invoice.customer.cardCode="C9999S02";
+    //shareService.invoice.customer.cardName="CONSUMIDOR FINAL";
 
     let line:DocumentLines=new DocumentLines(appSettings);
     line.itemCode="13010001";
     line.itemName="CEMENTO GRIS ARGOS PIEDRAZUL (BOLSA)";
-    line.price=1000;
+    line.price=185;
     line.taxPrcnt=15;
+    line.quantity=1000;
     shareService.invoice.setLine(line);
 
     line=new DocumentLines(appSettings);
@@ -42,6 +43,7 @@ export class InvoicePage {
     line.itemName="AVELLANADOR 211-12MM (1/2) P/METAL (S)";
     line.price=100;
     line.taxPrcnt=15;
+    line.quantity=100;
     shareService.invoice.setLine(line);
 
     line=new DocumentLines(appSettings);
@@ -49,6 +51,7 @@ export class InvoicePage {
     line.itemName="VARILLA HIERRO DEF.3/8 x 9 MTS GRADO-40";
     line.price=180;
     line.taxPrcnt=15;
+    line.quantity=20;
     shareService.invoice.setLine(line);
 
     this.tab1=InvoiceContentPage;

@@ -17,6 +17,6 @@
     <ion-spinner></ion-spinner>
   </div>
   <ion-list>
-      <button ion-item (click)="returnItem(item)" *ngFor="let item of items">{{item[itemDescription]}}</button>
+      <button ion-item detail-none (click)="returnItem(item)" *ngFor="let item of items">{{item[itemDescription]}}</button>
   </ion-list>
 </ion-content>

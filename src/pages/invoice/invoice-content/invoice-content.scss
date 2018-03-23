@@ -1,25 +1,58 @@
-page-invoice-content {    
-    #customer-section {         
-        img{
-            width: 40px;
-            height: 40px;
-            margin-right: 0px;
-            padding-right: 0px;
+page-invoice-content {                
+    ion-header{           
+        ion-item.item-md{
+            background: transparent;
+        }         
+        ion-toolbar.toolbar.toolbar-md{
+            padding:0;
+            img{
+                width: 40px;
+                height: 40px;
+                margin-right: 0px;
+                padding-right: 0px;       
+            } 
+            .button-inner{
+                flex-flow: column;                
+            }
         }
-    }
-
-    ion-toolbar.toolbar.toolbar-md{
-        padding:0;
-    }
-
-    ion-label.label.label-md{
-        margin:0;
-    }
     
+        ion-label.label.label-md{
+            margin:0;
+        }        
+    }
+
     ion-content{
         ion-list{
             ion-item-sliding{
                 ion-item{
+                    ion-fab{
+                        position: relative;
+                        display: inline-block;
+                        
+                    }
+                    
+                    ion-fab-list{
+                        top:-9px;                                                
+                    }
+
+                    ion-fab-list[side=right],ion-fab-list[side=left]{
+                        margin:0px 40px 0px 40px;
+                    }
+
+                    .label-md{
+                        margin:0;
+                    }
+
+                    .fab[mini] {                        
+                        display: inline-block;                        
+                        height:30px;
+                        margin: 0;                            
+                        background: transparent;
+                        color:color($colors,primary);                        
+                        box-shadow: none;
+                        border-radius: 2px;
+                    }
+
                     p.itemcode, p.quantity, p.price, p.linetotal{
                         font-size: 9pt;                        
                     }

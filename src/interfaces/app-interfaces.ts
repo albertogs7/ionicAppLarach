@@ -45,10 +45,25 @@ export interface ICustomers{
     cardCode:string;
     cardName:string;
     RFC:string;
+    groupNum:number;
     phone:string;
     email:string;
     street:string;
     block:string;
     state:string;
     country:string;
+}
+
+export interface ITerminalConfig{
+    store:{id:string,name:string},
+    customer:ICustomers,
+    salesPerson:{id:number,name:string},
+    wareHouse:{id:string,name:string},
+    priceList:{id:number,name:string},
+    series:Array<{objectCode:string,id:number,name:string}>   
+}
+
+export interface ISelectList{
+    id:number,
+    name:string 
 }

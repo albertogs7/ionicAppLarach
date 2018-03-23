@@ -18,22 +18,17 @@ import { ShareService } from '../../../providers/shareservice';
   templateUrl: 'invoice-details.html',
 })
 export class InvoiceDetailsPage {
-  docHeader;
-  salesPersons:Array<{slpCode:number,slpName:string}>
-  constructor(public navCtrl: NavController, public navParams: NavParams, private shareService:ShareService) {
+  docHeader; 
+  groupNum;   
+  constructor(public navCtrl: NavController, public navParams: NavParams, public shareService:ShareService) {            
     this.docHeader={docDate:shareService.invoice.docDate,
                     priceList:shareService.invoice.priceList,
-                    slpCode:shareService.invoice.slpCode,
-                    groupNum:shareService.invoice.groupNum,
+                    listName:shareService.pricesList.filter(x=>x.id===shareService.invoice.priceList)[0].name,                    
+                    salesPerson:{id:shareService.invoice.slpCode,name:shareService.salesPersons.filter(x=>x.id===shareService.invoice.slpCode)[0].name},                    
+                    groupNum:shareService.invoice.groupNum,                    
+                    address:shareService.invoice.address,
                     comments:shareService.invoice.comments,      
-                    }
-    this.salesPersons=[{slpCode:-1,slpName:"--Ningun empleado del departamento"},
-                       {slpCode:1,slpName:"Junior Perez"},
-                       {slpCode:2,slpName:"Yamileza Gonzales"},
-                       {slpCode:3,slpName:"Jose Arturo Flores"},
-                       {slpCode:4,slpName:"Carlos Pineda Chacon"},
-                       {slpCode:5,slpName:"Maritza Nohemi Colindres"},
-                      ];
+                    }                        
   }
 
   ionViewDidLoad() {
