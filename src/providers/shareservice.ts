@@ -47,7 +47,8 @@ export class ShareService{
                         "B2TGU",
                         "B3TGU",
                         "B5TGU",
-                        "B6TGU"];                        
+                        "B6TGU"];
+                                                
         this.countries=[{id:"HN",name:"Honduras"},
                         {id:"GT",name:"Guatemala"},
                         {id:"ES",name:"El Salvador"},
