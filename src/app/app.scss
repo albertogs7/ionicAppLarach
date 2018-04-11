@@ -1,16 +1,31 @@
-.content-header{
-    background:transparent;    
+.toolbar-background{
+    transform: none;
+}
+
+//.content-header{
+ion-header{
+    ion-title{
+    //background:color($colors,primary);    
     color:color($colors,primary);
     text-align: center;
+    box-shadow:
+    inset 0 60px 0 color($colors,secondary);
+    p{
+        font-size: 8pt;
+        margin:0;
+        color:color($colors, primary)
+    }
+    //inset 0 -50px 0 blue;
     img{
-        width: 100px;
+        width: 80px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        padding: 3px;
+        margin-top:0px;    
         //border:1px solid white;            
     }  
+}
     ion-icon{
-        font-size: 40pt;
+        font-size: 60pt;
     }    
     ion-item{
         //background: transparent;

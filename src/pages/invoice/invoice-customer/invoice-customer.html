@@ -1,18 +1,26 @@
 <ion-header>
-    <ion-navbar>                            
-    </ion-navbar>    
-    <ion-item no-lines class="content-header">              
-        <img src="{{customer.imagePath}}" />
-        <h3>Detalles del cliente</h3>
-    </ion-item>
+    <ion-navbar>                                    
+    </ion-navbar>
+    <ion-title>
+        <ion-grid>
+            <ion-row>
+                <ion-col text-left style="overflow-x:hidden">
+                    <p>Saldo L. 100,000.00</p>
+                    <p>Disp. L. 100,000.00</p>                    
+                </ion-col>
+                <ion-col>                    
+                    <img src="{{customer.imagePath}}" />
+                </ion-col>                
+                <ion-col>
+                    <!--<p style="font-size:10pt"></p> -->                                       
+                    <button ion-button small outline>{{shareService.invoice.customer.cardCode}}</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>            
+      </ion-title>    
   </ion-header>
   <ion-content>
-    <ion-list>
-      <ion-item>
-          <ion-label stacked>Codigo</ion-label>
-          <ion-label>{{shareService.invoice.customer.cardCode}}</ion-label>          
-          <button ion-button outline item-end>Cambiar</button>
-      </ion-item>
+    <ion-list>      
       <ion-item>
           <ion-label stacked>Nombre</ion-label>
           <ion-input type="text" [(ngModel)]="customer.cardName"></ion-input>
