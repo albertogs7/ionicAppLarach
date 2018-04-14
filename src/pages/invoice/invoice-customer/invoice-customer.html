@@ -4,16 +4,18 @@
     <ion-title>
         <ion-grid>
             <ion-row>
-                <ion-col text-left style="overflow-x:hidden">
+                <ion-col text-left style="overflow-x:hidden">                                        
                     <p>Saldo L. 100,000.00</p>
                     <p>Disp. L. 100,000.00</p>                    
                 </ion-col>
                 <ion-col>                    
-                    <img src="{{customer.imagePath}}" />
+                    <!--<img src="{{customer.imagePath}}" />-->
+                    <ion-icon name="ios-contact"></ion-icon>
+                    <button ion-fab mini color="secondary"><ion-icon name="create"></ion-icon></button>
                 </ion-col>                
                 <ion-col>
-                    <!--<p style="font-size:10pt"></p> -->                                       
-                    <button ion-button small outline>{{shareService.invoice.customer.cardCode}}</button>
+                    <p>{{shareService.invoice.customer.cardCode}}</p>
+                    <!--<p style="font-size:10pt"></p> -->                                                           
                 </ion-col>
             </ion-row>
         </ion-grid>            

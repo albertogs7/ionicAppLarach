@@ -5,15 +5,17 @@
 //.content-header{
 ion-header{
     ion-title{
-    //background:color($colors,primary);    
+    background:color($colors,primary);    
     color:color($colors,primary);
     text-align: center;
+    /*
     box-shadow:
-    inset 0 60px 0 color($colors,secondary);
+    inset 0 60px 0 color($colors,primary);
+    */
     p{
         font-size: 8pt;
         margin:0;
-        color:color($colors, primary)
+        color:color($colors, light)
     }
     //inset 0 -50px 0 blue;
     img{
@@ -21,12 +23,19 @@ ion-header{
         -webkit-border-radius: 50%;
         border-radius: 50%;
         margin-top:0px;    
-        //border:1px solid white;            
+        //border:1px solid white;                
     }  
-}
     ion-icon{
-        font-size: 60pt;
-    }    
+        font-size: 50pt;
+        color:color($colors,light);
+    }   
+    button.fab{
+        position: absolute;
+        top:53%;
+        left:55%;
+    } 
+}
+    
     ion-item{
         //background: transparent;
     }

@@ -58,7 +58,7 @@ export class ShareService{
         this.terminalConfig={
             store:{id:"S02",name:"SALA #2"},
             customer:{cardCode:"C9999S02",cardName:"CONSUMIDOR FINAL",
-                      RFC:"000000000000",groupNum:1,phone:"",email:"sistemas@larachycia.com",state:"Tegucigalpa",country:"HN",address:"Col. Miramontes, Calle la Salud",imagePath:"assets/imgs/customer.png"},
+                      RFC:"000000000000",groupNum:1,phone:"",email:"sistemas@larachycia.com",state:"Tegucigalpa",country:"HN",address:"Col. Miramontes, Calle la Salud",imagePath:"assets/imgs/male-user.png"},
             salesPerson:{id:-1,name:"--Ningun empleado del departamento"},
             wareHouse:{id:"S2TGU",name:"Sala 2 Tegucigalpa"},
             priceList:{id:2,name:"02-Precios Detalle sin ISV"},
