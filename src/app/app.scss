@@ -2,39 +2,49 @@
     transform: none;
 }
 
-//.content-header{
-ion-header{
-    ion-title{
-    background:color($colors,primary);    
-    color:color($colors,primary);
+.spinner-container {
+    width: 100%;
     text-align: center;
-    /*
-    box-shadow:
-    inset 0 60px 0 color($colors,primary);
-    */
-    p{
-        font-size: 8pt;
-        margin:0;
-        color:color($colors, light)
-    }
-    //inset 0 -50px 0 blue;
-    img{
-        width: 80px;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        margin-top:0px;    
-        //border:1px solid white;                
-    }  
-    ion-icon{
-        font-size: 50pt;
-        color:color($colors,light);
-    }   
-    button.fab{
-        position: absolute;
-        top:53%;
-        left:55%;
-    } 
+    padding: 10px;
 }
+//.content-header{
+//ion-header.details-page{
+ion-content{
+    ion-title{
+        background:color($colors,primary);    
+        color:color($colors,primary);
+        text-align: center;
+        /*
+        box-shadow:
+        inset 0 60px 0 color($colors,primary);
+        */
+        p{
+            font-size: 8pt;
+            margin:0;
+            color:color($colors, light)
+        }
+        //inset 0 -50px 0 blue;
+        img{
+            width: 80px;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            margin-top:0px;    
+            //border:1px solid white;                
+        }  
+        ion-icon.details-icon{
+            font-size: 60pt;
+            color:color($colors,light);
+        }   
+
+        button.fab{
+            position: absolute;
+            top:48%;
+            left:52%;            
+            color:color($colors,light);
+            width: 34px;
+            height:34px;
+        } 
+    }
     
     ion-item{
         //background: transparent;

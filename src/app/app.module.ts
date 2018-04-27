@@ -26,6 +26,7 @@ import { ShareService } from '../providers/shareservice';
 import { SelectSearchableModule } from '../components/select-searchable/select-searchable.module';
 import { InvoiceCustomerPage } from '../pages/invoice/invoice-customer/invoice-customer';
 import { InvoiceItemPage } from '../pages/invoice/invoice-item/invoice-item';
+import { CustomerSearchPage } from '../pages/customer-search/customer-search';
 //import { SelectSearchablePage } from '../components/select-searchable/select-searchable-page/select-searchable';
 //import {Page2} from '../pages/page2/page2';
 
@@ -40,7 +41,8 @@ import { InvoiceItemPage } from '../pages/invoice/invoice-item/invoice-item';
     InvoiceContentPage,
     InvoiceDetailsPage,
     InvoiceCustomerPage,
-    InvoiceItemPage
+    InvoiceItemPage,
+    CustomerSearchPage
 
   ],
   imports: [
@@ -63,7 +65,8 @@ import { InvoiceItemPage } from '../pages/invoice/invoice-item/invoice-item';
     InvoiceContentPage,
     InvoiceDetailsPage,
     InvoiceCustomerPage,
-    InvoiceItemPage
+    InvoiceItemPage,
+    CustomerSearchPage
   ],
   
   providers: [

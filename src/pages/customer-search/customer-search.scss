@@ -1,0 +1,33 @@
+page-customer-search {
+    ion-header.header::after {
+        background-image: none;
+        background-repeat: no-repeat;
+    }    
+    button.item{
+        padding-left:3px;
+        ion-label{
+            margin-bottom:0px;
+        }
+    }
+    label.contact-letter{
+        background: none repeat scroll 0 0 color($colors,primary);        
+        border-radius: 50%;
+        color: #fff;
+        font-size: 18pt;        
+        padding: 5px 12px;        
+    }
+    p.item-level1{
+        //font-size: 9pt;
+        color:color($colors,primary);
+        white-space: pre-wrap;
+    }
+    p.item-level2{
+        font-size: 9pt;                  
+        //white-space: pre-wrap;
+    }
+    p.item-info{
+        font-size: 9pt;                  
+        font-weight: bold;
+        //white-space: pre-wrap;
+    }
+}

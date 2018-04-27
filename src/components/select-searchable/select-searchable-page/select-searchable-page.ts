@@ -25,8 +25,6 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SelectSearchablePage{
   @ViewChild('searchBox') private searchBox ;
 
-  //searchTerm$ = new Subject<string>();
-
   title:string;
   itemValue:string;
   itemDescription:string;

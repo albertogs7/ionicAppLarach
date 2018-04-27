@@ -49,5 +49,9 @@ export class AppSettings{
         num = num.toString().split('e');
         return signo * +(num[0] + 'e' + (num[1] ? (+num[1] - decimales) : -decimales));
     }
+
+    get defaultDebounceTime():number{
+        return 700;
+    }
 }
 

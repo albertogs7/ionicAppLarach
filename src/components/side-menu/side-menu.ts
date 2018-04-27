@@ -1,7 +1,8 @@
 import { Component,ViewChild,trigger,state,animate,style, transition, Input } from '@angular/core';
-import { Nav } from 'ionic-angular';
+import { Nav, NavController } from 'ionic-angular';
 import { IMenuItem, IUserData } from '../../interfaces/app-interfaces';
 import {HomePage} from '../../pages/home/home';
+import { InvoicePage } from '../../pages/invoice/invoice';
 /**
  * Generated class for the SideMenuComponent component.
  *
@@ -33,7 +34,7 @@ import {HomePage} from '../../pages/home/home';
 })
 
 export class SideMenuComponent {    
-  @ViewChild('nav') nav:Nav;
+  //@ViewChild('nav') nav:Nav;
   public currentMenu:IMenuItem[];  
   public title:string;
   @Input('user-data') userData:IUserData;
@@ -41,14 +42,15 @@ export class SideMenuComponent {
   private parentMenu:Array<{title:string,menu:IMenuItem[]}>;
   private hideMenuBackButton:boolean=true;  
   
-  constructor() {            
+  constructor(public navCtrl:NavController) {            
     this.parentMenu=this.getMainMenuItems();
     this.title=this.parentMenu[0].title;
     this.currentMenu=this.parentMenu[0].menu;        
   }
 
-  goToPage(page){
-    //this.nav.setRoot(page);
+  goToPage(page){    
+    //this.nav.setRoot(InvoicePage);
+    this.navCtrl.setRoot(page);
   }
 
   setUserData(userData:IUserData){
@@ -75,12 +77,9 @@ export class SideMenuComponent {
                                 {id:1,title:"General",component:HomePage,icon:"home",children:null},
                                 {id:2,title:"Ventas",component:HomePage,icon:"home",
                                 children:[
-                                            {id:11,title:"Cotización",component:HomePage,icon:"home",children:null},
-                                            {id:12,title:"Factura de clientes",component:null,icon:"home",
-                                            children:[
-                                                {id:121,title:"Contado",component:HomePage,icon:"home",children:null},
-                                                {id:122,title:"Credito",component:HomePage,icon:"home",children:null}
-                                            ]}
+                                            {id:11,title:"Cotización",component:InvoicePage,icon:"home",children:null},
+                                            {id:12,title:"Factura de clientes",component:InvoicePage,icon:"home",
+                                            children:null}
                                             ]
                                 },
                     {id:3,title:"Inventarios",component:HomePage,icon:"home",

@@ -15,7 +15,7 @@
     <ion-content id="menu-content">
         <ion-list>
             <div *ngFor="let page of currentMenu">
-                <button [@flyInOut] ion-item  *ngIf="page.children===null;else subMenuButton" menuClose><ion-icon item-left name="{{page.icon}}"></ion-icon>{{page.title}}</button>                
+                <button [@flyInOut] ion-item  *ngIf="page.children===null;else subMenuButton" (click)="goToPage(page.component)" menuClose><ion-icon item-left name="{{page.icon}}"></ion-icon>{{page.title}}</button>                
                 <ng-template #subMenuButton><button [@flyInOut] ion-item (click)="downMenuLevel(page.id)"><ion-icon item-left name="{{page.icon}}"></ion-icon>{{page.title}}<ion-icon item-right name="arrow-forward"></ion-icon></button></ng-template>
             </div>
         </ion-list>        

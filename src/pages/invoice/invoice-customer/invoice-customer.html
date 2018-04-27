@@ -1,6 +1,8 @@
 <ion-header>
     <ion-navbar>                                    
-    </ion-navbar>
+    </ion-navbar>    
+  </ion-header>
+  <ion-content>
     <ion-title>
         <ion-grid>
             <ion-row>
@@ -10,8 +12,8 @@
                 </ion-col>
                 <ion-col>                    
                     <!--<img src="{{customer.imagePath}}" />-->
-                    <ion-icon name="ios-contact"></ion-icon>
-                    <button ion-fab mini color="secondary"><ion-icon name="create"></ion-icon></button>
+                    <ion-icon name="ios-contact" class="details-icon"></ion-icon>
+                    <button ion-fab mini color="secondary" (click)="searchCustomer()"><ion-icon name="create"></ion-icon></button>
                 </ion-col>                
                 <ion-col>
                     <p>{{shareService.invoice.customer.cardCode}}</p>
@@ -19,9 +21,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>            
-      </ion-title>    
-  </ion-header>
-  <ion-content>
+    </ion-title>    
     <ion-list>      
       <ion-item>
           <ion-label stacked>Nombre</ion-label>

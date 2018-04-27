@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+      <ion-title>Buscar cliente</ion-title>
+  </ion-navbar>
+  <ion-searchbar #searchBox (input)="searching=true;searchTerm$.next($event.target.value)"></ion-searchbar>    
+</ion-header>  
+<ion-content>        
+    <div *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
+    </div>
+    <ion-list>
+        <button ion-item detail-none (click)="returnItem(item)" *ngFor="let item of results">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-2>
+                  <label class="contact-letter">{{item.CardName[0]}}</label>
+              </ion-col>
+              <ion-col col-7>
+                <p class="item-level2">{{item.CardCode}}</p>
+                <p class="item-level1">{{item.CardName}}</p>
+                <p class="item-level2">RFC: {{item.RFC}}</p>                
+                <p class="item-level2">Telefono: {{item.Phone1}}</p>                
+                <p class="item-level2">Grupo: {{item.GroupName}}</p>                
+              </ion-col>
+              <ion-col col-3 text-right>
+                  <p class="item-level2">Codición pago</p>                
+                  <p class="item-info">{{item.PymntGroup}}</p>
+                  <p class="item-level2">Límite crédito</p>                
+                  <p class="item-info">{{item.CreditLimit | currency:'L':'code'}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>  
+        </button>
+    </ion-list>
+</ion-content>
