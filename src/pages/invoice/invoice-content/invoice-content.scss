@@ -1,4 +1,8 @@
-page-invoice-content {                
+page-invoice-content {     
+    ion-header.header::after {
+        background-image: none;
+        background-repeat: no-repeat;
+    }           
     ion-header{           
         ion-item.item-md{
             background: transparent;
@@ -56,6 +60,9 @@ page-invoice-content {
 
                     p.itemcode, p.quantity, p.price, p.linetotal{
                         font-size: 9pt;                        
+                    }
+                    p.linetotal{
+                        font-weight: bold;
                     }
                     p.itemname{
                         white-space: pre-wrap;

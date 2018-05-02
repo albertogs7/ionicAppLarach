@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>                                    
+    </ion-navbar>    
+  </ion-header>
+  <ion-content>
+    <ion-title>                                                
+      <ion-icon name="cube" class="details-icon"></ion-icon>
+      <p>{item.itemCode}</p>                          
+    </ion-title>    
+    <ion-list>      
+      <ion-item>
+          <ion-label stacked>Descripción</ion-label>
+          <ion-input type="text" [(ngModel)]="item.itemName"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Almacen</ion-label>
+          <ion-select [(ngModel)]="item.whsCode">
+            <ion-option *ngFor="let item of shareService.wareHouses" [value]="item">{{item}}</ion-option>          
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Unidad medida</ion-label>
+          <ion-input type="text" [(ngModel)]="item.unitMsr" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked disabled>Artículos por unidad</ion-label>
+          <ion-input type="number" [(ngModel)]="item.numPerMsr" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Cantidad</ion-label>
+          <ion-input type="number" [(ngModel)]="item.quantity"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Precio</ion-label>
+          <ion-input type="number" [(ngModel)]="item.priceAfterTax" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Impuesto</ion-label>
+          <ion-input type="number" [(ngModel)]="item.priceAfterTax" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Total</ion-label>
+          <ion-input type="number" [(ngModel)]="item.lineTotal" disabled></ion-input>
+      </ion-item>                          
+    </ion-list>  
+  </ion-content>

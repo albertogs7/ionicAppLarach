@@ -4,6 +4,7 @@ import { Documents, DocumentLines } from '../../../class/app-objects';
 import { AppSettings } from '../../../providers/settings';
 import { ShareService } from '../../../providers/shareservice';
 import { InvoiceCustomerPage } from '../invoice-customer/invoice-customer';
+import { ItemDetailsPage } from '../../item-details/item-details';
 
 /**
  * Generated class for the InvoiceContentPage page.
@@ -30,5 +31,17 @@ export class InvoiceContentPage {
 
   customerDetails(){
     this.navCtrl.push(InvoiceCustomerPage);
+  }
+
+  itemDetails(index){
+    this.navCtrl.push(ItemDetailsPage,{lineIndex:index})
+  }
+
+  addLine(line:DocumentLines){
+    this.document.setLine(line);
+  }
+
+  removeLine(index:number){
+    this.document.removeLine(index);
   }
 }

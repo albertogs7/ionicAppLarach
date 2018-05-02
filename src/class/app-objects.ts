@@ -47,7 +47,7 @@ export class Documents {
 
     setLine(line:DocumentLines){
         this._subTotal+=line.lineTotalBefTax;
-        this._taxSum+=line.taxSum;
+        this._taxSum+=line.taxSum;    
         this._docTotal+=line.lineTotal;
         this._lines.push(line);
     }
@@ -106,35 +106,39 @@ export class DocumentLines {
     }
 
     get discPrcnt():number{
-        return (this._discPrcnt-1)*100;
+        return (this._discPrcnt)*100;
     }
 
     set discPrcnt(value:number){
-        this._discPrcnt=(value/100)+1;
+        this._discPrcnt=(value/100);
     }
 
     get priceAfterDisc():number{
         return this.price*(1-this._discPrcnt);
     }
 
+    get priceAfterTax():number{
+        return this.priceAfterDisc*(1+this._taxPrcnt);
+    }
+
     get taxPrcnt():number{
-        return (this._taxPrcnt-1)*100;
+        return (this._taxPrcnt)*100;
     }
 
     set taxPrcnt(value:number){        
-        this._taxPrcnt=(value/100)+1;
+        this._taxPrcnt=(value/100);
     }
 
-    get taxSum():number{
-        return this.appSettings.round(this.priceAfterDisc*this._taxPrcnt*(this.quantity*this.numPerMsr),DecimalType.PERCENTS);
+    get taxSum():number{        
+        return this.appSettings.round(this.priceAfterDisc*this._taxPrcnt*this.quantity,DecimalType.PERCENTS);
     }
 
     get lineTotal():number{        
-        return this.appSettings.round(this.quantity*this.numPerMsr*this.priceAfterDisc*this._taxPrcnt,DecimalType.TOTALS);
+        return this.appSettings.round(this.quantity*this.priceAfterDisc*(1+this._taxPrcnt),DecimalType.TOTALS);
     }
 
     get lineTotalBefTax():number{
-        return this.appSettings.round((this.quantity*this.numPerMsr*this.priceAfterDisc),DecimalType.TOTALS);
+        return this.appSettings.round((this.quantity*this.priceAfterDisc),DecimalType.TOTALS);
     }
     /*
     private calcLineFields(property:Property):void{

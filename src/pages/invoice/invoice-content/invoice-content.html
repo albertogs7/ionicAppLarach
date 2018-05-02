@@ -22,11 +22,11 @@
             </ion-grid>           
         </ion-item>
     </ion-toolbar>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>  
 </ion-header>
-<ion-content>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>    
+<ion-content>  
     <ion-list>
-        <ion-item-sliding *ngFor="let line of document.lines">
+        <ion-item-sliding *ngFor="let line of document.lines: let i=index;">
           <ion-item>
             <ion-grid>
               <ion-row>
@@ -39,21 +39,21 @@
                   <p class="quantity">Cantidad                       
                     <ion-fab>
                       <button ion-fab mini> {{line.quantity | number:'1.0-0'}}</button>
-                      <ion-fab-list side="right"><button ion-fab color="primary">+1</button></ion-fab-list>
-                      <ion-fab-list side="left"><button ion-fab color="primary">-1</button></ion-fab-list>
+                      <ion-fab-list side="right"><button (click)="line.quantity=line.quantity+1;" ion-fab color="primary">+1</button></ion-fab-list>
+                      <ion-fab-list side="left"><button (click)="line.quantity>1 ? line.quantity=line.quantity-1:line.quantity=1" ion-fab color="primary" >-1</button></ion-fab-list>
                     </ion-fab>                                                          
                   </p>                  
                 </ion-col>
                 <ion-col col-4 text-right>
-                    <p class="price">Precio:{{line.price | currency:'L':'code'}}</p>
+                    <p class="price">Precio:{{line.priceAfterTax | currency:'L':'code'}}</p>
                     <p class="linetotal">Total: {{line.lineTotal | currency:'L':'code'}}</p>
                 </ion-col>
               </ion-row>
             </ion-grid>                                      
           </ion-item>
           <ion-item-options side="right">
-            <button ion-button color="primary"><ion-icon name="text"></ion-icon>Delete</button>
-            <button ion-button color="secondary"><ion-icon name="call"></ion-icon>Details</button>
+            <button ion-button color="secondary" (click)="itemDetails(line)"><ion-icon name="list"></ion-icon></button>
+            <button ion-button color="danger" (click)="removeLine(index)"><ion-icon name="trash"></ion-icon></button>
           </ion-item-options>          
         </ion-item-sliding>
       </ion-list>
@@ -61,12 +61,12 @@
 <ion-footer>  
     <ion-grid style="padding:0">
       <ion-row>
-        <ion-col col-3></ion-col>
+        <ion-col col-2></ion-col>
         <ion-col col-5 class="subtotals">            
             Dscto: {{document.discSum | currency:'L':'code'}}<br>
             Impto: {{document.taxSum | currency:'L':'code'}}
         </ion-col>
-        <ion-col col-4 class="total">
+        <ion-col col-5 class="total">
             TOTAL
             <ion-row><button ion-button clear color="light" block class="total">{{document.docTotal | currency:'L':'code'}}</button></ion-row>
         </ion-col>

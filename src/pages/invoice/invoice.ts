@@ -52,6 +52,22 @@ export class InvoicePage {
     line.quantity=20;
     shareService.invoice.setLine(line);
 
+    line=new DocumentLines(appSettings);
+    line.itemCode="12030004";
+    line.itemName="VARILLA HIERRO DEF.4/8 x 10 MTS GRADO-40";
+    line.price=180;
+    line.taxPrcnt=15;
+    line.quantity=20;
+    shareService.invoice.setLine(line);
+
+    line=new DocumentLines(appSettings);
+    line.itemCode="01010003";
+    line.itemName="VARILLA HIERRO DEF.4/8 x 10 MTS GRADO-40";
+    line.price=180;
+    line.taxPrcnt=15;
+    line.quantity=20;
+    shareService.invoice.setLine(line);
+
     this.tab1=InvoiceContentPage;
     this.tab2=InvoiceDetailsPage;
     this.tab3=InvoiceDetailsPage;
