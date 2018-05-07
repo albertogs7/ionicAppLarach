@@ -3,7 +3,6 @@ import {AppSettings} from '../providers/settings';
 import { DecimalType } from './app-enums';
 import { PROP_METADATA } from '@angular/core/src/util/decorators';
 import { ShareService } from '../providers/shareservice';
-import { DoCheck, KeyValueDiffers } from '@angular/core';
 
 enum Property{
     TAXPERCENT,
@@ -31,11 +30,29 @@ export class Documents {
     address:string; 
     comments:string;   
     
+    
     private _lines:Array<DocumentLines>;
     private _subTotal:number=0;
     private _taxSum:number=0;
     private _docTotal:number=0;
     private _paidSum:number=0;
+
+    private arrayChangeHandler = {
+        get: function(target, property) {
+          //console.log('getting ' + property + ' for ' + target);
+          // property is index in this case
+          return target[property];
+        },
+        set: function(target, property, value, receiver) {
+          target[property] = value;
+          console.log('setting ' + property);
+          console.log(receiver);
+          // you have to return true to accept the changes
+          return true;
+        }
+      };
+
+    private proxyLines;
 
     constructor(public appSettings:AppSettings,private shareService:ShareService){
         this.customer=shareService.terminalConfig.customer;        
@@ -43,22 +60,23 @@ export class Documents {
         this.priceList=shareService.terminalConfig.priceList.id;
         this.groupNum=shareService.terminalConfig.customer.groupNum;
         this.docDate=new Date();
-        this._lines=[];
+        this._lines=[];   
+        this.proxyLines=new Proxy(this._lines,this.arrayChangeHandler);           
     }
 
     setLine(line:DocumentLines){
         this._subTotal+=line.lineTotalBefTax;
         this._taxSum+=line.taxSum;    
         this._docTotal+=line.lineTotal;
-        this._lines.push(line);
+        this.proxyLines.push(line);
     }
 
     getLine(index:number):DocumentLines{
-        return this._lines[index];
+        return this.proxyLines[index];
     }
 
     get lines():Array<DocumentLines>{
-        return this._lines;
+        return this.proxyLines;
     }
 
     removeLine(index:number){
@@ -80,9 +98,11 @@ export class Documents {
     get docTotal():number{
         return this._docTotal;
     }
+
+   
 }
 
-export class DocumentLines implements DoCheck {
+export class DocumentLines {
     visOrder:number;
     itemCode:string;
     itemName:string;
@@ -100,25 +120,10 @@ export class DocumentLines implements DoCheck {
     //private _priceAfterDisc:number=0;
     //private _taxSum:number=0;
     //private _lineTotal:number=0;
-    
-    differ: any;
 
-    constructor(public appSettings:AppSettings, private differs: KeyValueDiffers){
-        this.differ = differs.find({}).create(null);
+    constructor(public appSettings:AppSettings){
+        
     }
-
-    ngDoCheck() {
-		var changes = this.differ.diff(this.person);
-
-		if(changes) {
-			console.log('changes detected');
-			changes.forEachChangedItem(r => console.log('changed ', r.currentValue));
-			changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
-			changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
-		} else {
-			console.log('nothing changed');
-		}
-	}
 
     get discPrcnt():number{
         return (this._discPrcnt)*100;

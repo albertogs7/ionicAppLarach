@@ -39,7 +39,7 @@
                   <p class="quantity">Cantidad                       
                     <ion-fab>
                       <button ion-fab mini> {{line.quantity | number:'1.0-0'}}</button>
-                      <ion-fab-list side="right"><button (click)="line.quantity=line.quantity+1;" ion-fab color="primary">+1</button></ion-fab-list>
+                      <ion-fab-list side="right"><button (click)="document.lines[i].quantity=document.lines[i].quantity+1;" ion-fab color="primary">+1</button></ion-fab-list>
                       <ion-fab-list side="left"><button (click)="line.quantity>1 ? line.quantity=line.quantity-1:line.quantity=1" ion-fab color="primary" >-1</button></ion-fab-list>
                     </ion-fab>                                                          
                   </p>                  

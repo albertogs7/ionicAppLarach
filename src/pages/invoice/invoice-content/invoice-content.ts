@@ -34,7 +34,9 @@ export class InvoiceContentPage {
   }
 
   itemDetails(index){
-    this.navCtrl.push(ItemDetailsPage,{lineIndex:index})
+    this.document.lines[0].quantity=this.document.lines[0].quantity+1;
+    this.shareService.invoice.lines[0].quantity=this.shareService.invoice.lines[0].quantity+1;
+    //this.navCtrl.push(ItemDetailsPage,{lineIndex:index});
   }
 
   addLine(line:DocumentLines){
