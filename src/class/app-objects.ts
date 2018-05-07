@@ -3,6 +3,7 @@ import {AppSettings} from '../providers/settings';
 import { DecimalType } from './app-enums';
 import { PROP_METADATA } from '@angular/core/src/util/decorators';
 import { ShareService } from '../providers/shareservice';
+import { DoCheck, KeyValueDiffers } from '@angular/core';
 
 enum Property{
     TAXPERCENT,
@@ -81,7 +82,7 @@ export class Documents {
     }
 }
 
-export class DocumentLines {
+export class DocumentLines implements DoCheck {
     visOrder:number;
     itemCode:string;
     itemName:string;
@@ -100,10 +101,24 @@ export class DocumentLines {
     //private _taxSum:number=0;
     //private _lineTotal:number=0;
     
-   
-    constructor(public appSettings:AppSettings){
-        
+    differ: any;
+
+    constructor(public appSettings:AppSettings, private differs: KeyValueDiffers){
+        this.differ = differs.find({}).create(null);
     }
+
+    ngDoCheck() {
+		var changes = this.differ.diff(this.person);
+
+		if(changes) {
+			console.log('changes detected');
+			changes.forEachChangedItem(r => console.log('changed ', r.currentValue));
+			changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
+			changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
+		} else {
+			console.log('nothing changed');
+		}
+	}
 
     get discPrcnt():number{
         return (this._discPrcnt)*100;
