@@ -35,7 +35,7 @@ export class InvoicePage {
     line.taxPrcnt=15;
     line.quantity=1000;
     shareService.invoice.setLine(line);
-
+    
     line=new DocumentLines(appSettings);
     line.itemCode="01010001";
     line.itemName="AVELLANADOR 211-12MM (1/2) P/METAL (S)";
@@ -43,7 +43,7 @@ export class InvoicePage {
     line.taxPrcnt=15;
     line.quantity=100;
     shareService.invoice.setLine(line);
-
+    /*
     line=new DocumentLines(appSettings);
     line.itemCode="12030007";
     line.itemName="VARILLA HIERRO DEF.3/8 x 9 MTS GRADO-40";
@@ -67,7 +67,7 @@ export class InvoicePage {
     line.taxPrcnt=15;
     line.quantity=20;
     shareService.invoice.setLine(line);
-
+    */
     this.tab1=InvoiceContentPage;
     this.tab2=InvoiceDetailsPage;
     this.tab3=InvoiceDetailsPage;

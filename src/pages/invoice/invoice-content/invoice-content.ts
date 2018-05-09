@@ -22,7 +22,8 @@ export class InvoiceContentPage {
   document:Documents;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private shareService:ShareService) {
-    this.document=shareService.invoice;    
+    this.document=shareService.invoice;
+    console.log(document);    
   }
 
   ionViewDidLoad() {
@@ -35,7 +36,7 @@ export class InvoiceContentPage {
 
   itemDetails(index){
     this.document.lines[0].quantity=this.document.lines[0].quantity+1;
-    this.shareService.invoice.lines[0].quantity=this.shareService.invoice.lines[0].quantity+1;
+    //this.shareService.invoice.lines[0].quantity=this.shareService.invoice.lines[0].quantity+1;
     //this.navCtrl.push(ItemDetailsPage,{lineIndex:index});
   }
 

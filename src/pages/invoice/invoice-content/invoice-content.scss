@@ -30,6 +30,7 @@ page-invoice-content {
         ion-list{
             ion-item-sliding{
                 ion-item{
+                    
                     ion-fab{
                         position: relative;
                         display: inline-block;                        
@@ -42,12 +43,12 @@ page-invoice-content {
                     ion-fab-list[side=right],ion-fab-list[side=left]{
                         margin:0px 40px 0px 40px;
                     }
-
+                    
                     .label-md{
                         margin:0;
                     }
-
-                    .fab[mini] {                        
+                    
+                    .fab[mini] {                                  
                         display: inline-block;                        
                         height:30px;
                         margin: 0;                            
@@ -57,7 +58,7 @@ page-invoice-content {
                         border-radius: 2px;
                         font-size: 10pt;
                     }
-
+                    
                     p.itemcode, p.quantity, p.price, p.linetotal{
                         font-size: 9pt;                        
                     }

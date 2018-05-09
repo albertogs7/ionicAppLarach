@@ -13,6 +13,8 @@ enum Property{
 }
 
 export class Documents {
+    parent=this;
+
     customer:ICustomers;
     numAtCard:string;
     docNum:number;
@@ -29,30 +31,47 @@ export class Documents {
     discSum:number; 
     address:string; 
     comments:string;   
-    
-    
-    private _lines:Array<DocumentLines>;
+            
     private _subTotal:number=0;
     private _taxSum:number=0;
     private _docTotal:number=0;
     private _paidSum:number=0;
 
-    private arrayChangeHandler = {
-        get: function(target, property) {
-          //console.log('getting ' + property + ' for ' + target);
-          // property is index in this case
-          return target[property];
-        },
-        set: function(target, property, value, receiver) {
-          target[property] = value;
-          console.log('setting ' + property);
-          console.log(receiver);
-          // you have to return true to accept the changes
-          return true;
-        }
-      };
+    private proxyHandler = {
+        parent:this.parent,
 
-    private proxyLines;
+        get: function(target, prop,receiver) {
+            if (typeof target[prop]=="object" && target[prop] !== null){                
+                return new Proxy(target[prop],this);
+            }
+            else {
+                return target[prop];
+                //return Reflect.get(target,prop,receiver);
+            }                                            
+        },
+        set: function(target, prop, value, receiver) {            
+            switch(prop){              
+                case "quantity":
+                case "price":
+                case "discPrcnt":
+                case "discSum":
+                case "taxPrcnt":                                                                                                       
+                this.parent._subTotal-=target["lineTotalBefTax"];//resto los valores anteriores de la linea
+                this.parent._taxSum-=target["taxSum"];
+                this.parent._docTotal-=target["lineTotal"];
+                target[prop] = value;                
+                this.parent._subTotal+=target["lineTotalBefTax"]; //sumo los nuevos valores de la linea
+                this.parent._taxSum+=target["taxSum"];
+                this.parent._docTotal+=target["lineTotal"];                                                                 
+            default:
+                target[prop] = value;
+            }             
+            return true;
+        }      
+    };
+    
+    private _lines:Array<DocumentLines>=[];
+    private proxyLines=new Proxy(this._lines,this.proxyHandler);
 
     constructor(public appSettings:AppSettings,private shareService:ShareService){
         this.customer=shareService.terminalConfig.customer;        
@@ -60,8 +79,9 @@ export class Documents {
         this.priceList=shareService.terminalConfig.priceList.id;
         this.groupNum=shareService.terminalConfig.customer.groupNum;
         this.docDate=new Date();
-        this._lines=[];   
-        this.proxyLines=new Proxy(this._lines,this.arrayChangeHandler);           
+        //this._lines=[];   
+        //this.proxyLines=new Proxy(this._lines,this.proxyHandler);           
+        
     }
 
     setLine(line:DocumentLines){
@@ -74,17 +94,19 @@ export class Documents {
     getLine(index:number):DocumentLines{
         return this.proxyLines[index];
     }
-
+    
     get lines():Array<DocumentLines>{
+        console.log(this.proxyLines);
         return this.proxyLines;
+        //return this._lines;
     }
 
     removeLine(index:number){
-        let line=this._lines[index];
+        let line=this.proxyLines[index];
         this._subTotal-=line.lineTotalBefTax
         this._taxSum-=line.taxSum;
         this._docTotal-=line.lineTotal;
-        delete this._lines[index];
+        delete this.proxyLines[index];
     }
 
     get subTotal():number{
