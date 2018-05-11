@@ -13,8 +13,7 @@ enum Property{
 }
 
 export class Documents {
-    parent=this;
-
+    
     customer:ICustomers;
     numAtCard:string;
     docNum:number;
@@ -31,47 +30,52 @@ export class Documents {
     discSum:number; 
     address:string; 
     comments:string;   
-            
+    
+
     private _subTotal:number=0;
     private _taxSum:number=0;
     private _docTotal:number=0;
     private _paidSum:number=0;
-
+    private _lines:Array<DocumentLine>=[];//DocumentLines=new DocumentLines();
+    
+    private parent=this;
     private proxyHandler = {
         parent:this.parent,
-
-        get: function(target, prop,receiver) {
-            if (typeof target[prop]=="object" && target[prop] !== null){                
-                return new Proxy(target[prop],this);
-            }
-            else {
-                return target[prop];
-                //return Reflect.get(target,prop,receiver);
-            }                                            
+        proxyChild:{
+            parent:this.parent,            
+            set: function(target, prop, value, receiver) {                                                        
+                switch(prop){                                  
+                    case "quantity":
+                    case "price":
+                    case "discPrcnt":
+                    case "discSum":
+                    case "taxPrcnt":                                                                                                      
+                        this.parent._subTotal-=target["lineTotal"];//resto los valores anteriores de la linea
+                        this.parent._taxSum-=target["taxSum"];                        
+                        target[prop] = value;                
+                        this.parent._subTotal+=target["lineTotal"]; //sumo los nuevos valores de la linea
+                        this.parent._taxSum+=target["taxSum"];
+                        this.parent._docTotal=this.parent.subTotal+this.parent.taxSum;                                                                 
+                        break;                                        
+                default:
+                    target[prop] = value;
+                    break;
+                }             
+                return true;
+            }            
         },
-        set: function(target, prop, value, receiver) {            
-            switch(prop){              
-                case "quantity":
-                case "price":
-                case "discPrcnt":
-                case "discSum":
-                case "taxPrcnt":                                                                                                       
-                this.parent._subTotal-=target["lineTotalBefTax"];//resto los valores anteriores de la linea
-                this.parent._taxSum-=target["taxSum"];
-                this.parent._docTotal-=target["lineTotal"];
-                target[prop] = value;                
-                this.parent._subTotal+=target["lineTotalBefTax"]; //sumo los nuevos valores de la linea
-                this.parent._taxSum+=target["taxSum"];
-                this.parent._docTotal+=target["lineTotal"];                                                                 
-            default:
-                target[prop] = value;
-            }             
+        set: function(target, prop,value,receiver) {                                                
+            if (typeof value==="object" && target[prop]===undefined) {
+                target[prop]=new Proxy(value,this.proxyChild);                  
+            }
+            else target[prop]=value;
+            
             return true;
-        }      
+                //return Reflect.get(target,prop,receiver);                                                   
+        },        
     };
-    
-    private _lines:Array<DocumentLines>=[];
-    private proxyLines=new Proxy(this._lines,this.proxyHandler);
+              
+    private proxyLines=new Proxy(this._lines,this.proxyHandler);;
 
     constructor(public appSettings:AppSettings,private shareService:ShareService){
         this.customer=shareService.terminalConfig.customer;        
@@ -79,38 +83,45 @@ export class Documents {
         this.priceList=shareService.terminalConfig.priceList.id;
         this.groupNum=shareService.terminalConfig.customer.groupNum;
         this.docDate=new Date();
-        //this._lines=[];   
-        //this.proxyLines=new Proxy(this._lines,this.proxyHandler);           
+        let parent=this.parent;
+
+        Object.defineProperty(this._lines, 'add', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function(line){
+                parent._subTotal+=line.lineTotal;
+                parent._taxSum+=line.taxSum;    
+                parent._docTotal=parent.subTotal+parent.taxSum;
+                parent.proxyLines.push(line);
+            }
+          }); 
         
-    }
-
-    setLine(line:DocumentLines){
-        this._subTotal+=line.lineTotalBefTax;
-        this._taxSum+=line.taxSum;    
-        this._docTotal+=line.lineTotal;
-        this.proxyLines.push(line);
-    }
-
-    getLine(index:number):DocumentLines{
-        return this.proxyLines[index];
+          Object.defineProperty(this._lines, 'remove', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function(index){
+                let line=parent.proxyLines[index];
+                parent._subTotal-=line.lineTotal;
+                parent._taxSum-=line.taxSum;    
+                parent._docTotal=parent.subTotal+parent.taxSum;                
+                parent.proxyLines.splice(index,1);
+            }
+          }); 
+        //this.lines.remove=function(index){console.log("llamada a funcion remove, index "+index)};
+        //console.log(this.lines);
+        //this._lines.add=function()
     }
     
-    get lines():Array<DocumentLines>{
-        console.log(this.proxyLines);
-        return this.proxyLines;
-        //return this._lines;
-    }
-
-    removeLine(index:number){
-        let line=this.proxyLines[index];
-        this._subTotal-=line.lineTotalBefTax
-        this._taxSum-=line.taxSum;
-        this._docTotal-=line.lineTotal;
-        delete this.proxyLines[index];
-    }
-
+    get lines():{Proxy:[Array<DocumentLines>],add:Function,remove:Function}{             
+        let parent=this.parent;
+        let proxyLines=this.proxyLines;        
+        return proxyLines;       
+    };          
+    
     get subTotal():number{
-        return this._subTotal;
+        return this._subTotal;        
     }
 
     get taxSum():number{
@@ -120,11 +131,9 @@ export class Documents {
     get docTotal():number{
         return this._docTotal;
     }
-
-   
 }
 
-export class DocumentLines {
+export class DocumentLine {
     visOrder:number;
     itemCode:string;
     itemName:string;
@@ -134,17 +143,12 @@ export class DocumentLines {
     price:number;
     quantity:number=1;
     numPerMsr:number=1;
-
+    stock:number=0;
+    
     private _taxPrcnt:number=0;
     private _discPrcnt:number=0;
-    //private _discSum:number=0;   
-
-    //private _priceAfterDisc:number=0;
-    //private _taxSum:number=0;
-    //private _lineTotal:number=0;
-
-    constructor(public appSettings:AppSettings){
-        
+    
+    constructor(public appSettings:AppSettings){                    
     }
 
     get discPrcnt():number{
@@ -160,7 +164,7 @@ export class DocumentLines {
     }
 
     get priceAfterTax():number{
-        return this.priceAfterDisc*(1+this._taxPrcnt);
+        return this.appSettings.round(this.priceAfterDisc*(1+this._taxPrcnt),DecimalType.PRICES);
     }
 
     get taxPrcnt():number{
@@ -172,34 +176,33 @@ export class DocumentLines {
     }
 
     get taxSum():number{        
-        return this.appSettings.round(this.priceAfterDisc*this._taxPrcnt*this.quantity,DecimalType.PERCENTS);
+        return this.appSettings.round(this.priceAfterDisc*this._taxPrcnt*this.quantity,DecimalType.TOTALS);        
     }
 
-    get lineTotal():number{        
-        return this.appSettings.round(this.quantity*this.priceAfterDisc*(1+this._taxPrcnt),DecimalType.TOTALS);
+    get lineTotalAfterTax():number{        
+        return this.appSettings.round(this.quantity*this.priceAfterDisc*(1+this._taxPrcnt),DecimalType.TOTALS);       
     }
 
-    get lineTotalBefTax():number{
-        return this.appSettings.round((this.quantity*this.priceAfterDisc),DecimalType.TOTALS);
+    get lineTotal():number{
+        return this.appSettings.round((this.quantity*this.priceAfterDisc),DecimalType.TOTALS);        
     }
-    /*
-    private calcLineFields(property:Property):void{
-        switch (property){
-            case Property.TAXPERCENT:
-                this._taxSum=this.appSettings.round(this._priceAfterDisc*this._taxPrcnt,DecimalType.TOTALS);
-                break;
+}
 
-            case Property.DISCSUM:
-                this._priceAfterDisc=this.appSettings.round(this._price-this._discSum,DecimalType.PRICES);
-                this._discPrcnt=this.appSettings.round(1-(this._priceAfterDisc/this._price),DecimalType.PERCENTS);
-                break;
-            
-            case Property.DISCPERCENT:
-                this._priceAfterDisc=(1-this._discPrcnt)*this._price;
-                this._discSum=this._price*this._discPrcnt;
-        }
-        
-        this._lineTotal=this.appSettings.round(this._quantity*this._priceAfterDisc*this._taxPrcnt,DecimalType.TOTALS);
+export class DocumentLines{
+    private _lines:Array<DocumentLine>=[];
+
+    //public constructor(appSettings:AppSettings){}
+
+    get lines():Array<DocumentLine>{
+        return this._lines;
     }
-    */
+    add(line){
+        this._lines.push(line);
+    }
+    remove(index){
+        this._lines.splice(index);
+    }
+    values(){return 11111}
+    value1(){return 11111}
+    [Symbol.iterator](){return this._lines.values()};
 }

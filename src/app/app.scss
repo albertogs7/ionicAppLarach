@@ -32,10 +32,11 @@ ion-content{
             //border:1px solid white;                
         }  
         ion-icon.details-icon{
-            font-size: 60pt;
+            font-size: 40pt;
             color:color($colors,light);
+            padding-top:10px;
         }   
-        /*
+        
         button.fab{
             position: absolute;
             top:48%;
@@ -43,10 +44,6 @@ ion-content{
             color:color($colors,light);
             width: 34px;
             height:34px;
-        } */
-    }
-    
-    ion-item{
-        //background: transparent;
-    }
+        } 
+    }    
 }

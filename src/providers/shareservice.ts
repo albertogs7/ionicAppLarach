@@ -63,7 +63,8 @@ export class ShareService{
             wareHouse:{id:"S2TGU",name:"Sala 2 Tegucigalpa"},
             priceList:{id:2,name:"02-Precios Detalle sin ISV"},
             series:[{objectCode:"13",id:56,name:"S2TGUCON"},
-                    {objectCode:"13",id:58,name:"S2TGUCRE"}]
+                    {objectCode:"13",id:58,name:"S2TGUCRE"}],
+            pricesWithTax:true            
         }
                       
     }

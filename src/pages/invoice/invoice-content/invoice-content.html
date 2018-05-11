@@ -26,7 +26,7 @@
 </ion-header>
 <ion-content>  
   <ion-list>
-      <ion-item-sliding>
+      <ion-item-sliding *ngFor="let line of document.lines; let i=index;">
         <ion-item>
           <ion-grid>
             <ion-row>
@@ -34,26 +34,32 @@
                   <ion-icon name="cube"></ion-icon>
               </ion-col>
               <ion-col col-7>
-                <p class="itemcode">{{document.lines[0].itemCode}}</p>
-                <p class="itemname">{{document.lines[0].itemName}}</p>
+                <p class="itemcode">{{line.itemCode}}</p>
+                <p class="itemname">{{line.itemName}}</p>
                 <p class="quantity">Cantidad                       
                   <ion-fab>
-                    <button ion-fab mini>1</button>
-                    <ion-fab-list side="right"><button (click)="document.lines[0].quantity=document.lines[0].quantity+1;" ion-fab color="primary">+1</button></ion-fab-list>
-                    <ion-fab-list side="left"><button (click)="document.lines[0].quantity>1 ? document.lines[0].quantity=document.lines[0].quantity-1:document.lines[0].quantity=1;" ion-fab color="primary" >-1</button></ion-fab-list>
+                    <button ion-fab mini>{{line.quantity}}</button>
+                    <ion-fab-list side="right"><button (click)="line.quantity=line.quantity+1;" ion-fab color="primary">+1</button></ion-fab-list>
+                    <ion-fab-list side="left"><button (click)="line.quantity>1 ? line.quantity=line.quantity-1:line.quantity=1;" ion-fab color="primary" >-1</button></ion-fab-list>
                   </ion-fab>                                                          
                 </p>                  
               </ion-col>
               <ion-col col-4 text-right>
-                  <p class="price">Precio:{{document.lines[0].priceAfterTax | currency:'L':'code'}}</p>
-                  <p class="linetotal">Total: {{document.lines[0].lineTotal | currency:'L':'code'}}</p>
+                  <!--<div *ngIf="shareService.terminalConfig.pricesWithTax; else pricesWithoutTax">-->
+                      <p class="price">Precio:{{line.priceAfterTax | currency:'L':'code'}}</p>
+                      <p class="linetotal">Total: {{line.lineTotalAfterTax | currency:'L':'code'}}</p>
+                  <!--</div>-->                  
+                  <!--<ng-template #pricesWithoutTax>
+                      <p class="price">Precio:{{line.price | currency:'L':'code'}}</p>
+                      <p class="linetotal">Total: {{line.lineTotal | currency:'L':'code'}}</p>
+                  </ng-template>-->
               </ion-col>
             </ion-row>
           </ion-grid>                                      
         </ion-item>
         <ion-item-options side="right">
-          <button ion-button color="secondary" (click)="itemDetails(document.lines[0])"><ion-icon name="list"></ion-icon></button>
-          <button ion-button color="danger" (click)="removeLine(0)"><ion-icon name="trash"></ion-icon></button>
+          <button ion-button color="secondary" (click)="itemDetails(i)"><ion-icon name="cog"></ion-icon></button>
+          <button ion-button color="danger" (click)="removeLine(i)"><ion-icon name="trash"></ion-icon></button>
         </ion-item-options>          
       </ion-item-sliding>
     </ion-list>

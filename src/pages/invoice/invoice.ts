@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DocumentLines, Documents } from '../../class/app-objects';
+import { DocumentLine, Documents } from '../../class/app-objects';
 import { AppSettings } from '../../providers/settings';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
@@ -28,30 +28,41 @@ export class InvoicePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public appSettings:AppSettings,shareService:ShareService) {
     shareService.invoice=new Documents(appSettings,shareService);
 
-    let line:DocumentLines=new DocumentLines(appSettings);
+    let line:DocumentLine=new DocumentLine(appSettings);
     line.itemCode="13010001";
     line.itemName="CEMENTO GRIS ARGOS PIEDRAZUL (BOLSA)";
+    line.unitMsr="UNID";
+    line.whsCode="S2TGU";
     line.price=185;
     line.taxPrcnt=15;
-    line.quantity=1000;
-    shareService.invoice.setLine(line);
-    
-    line=new DocumentLines(appSettings);
+    line.quantity=1000;    
+
+    shareService.invoice.lines.add(line);
+        
+    line=new DocumentLine(appSettings);
     line.itemCode="01010001";
     line.itemName="AVELLANADOR 211-12MM (1/2) P/METAL (S)";
     line.price=100;
+    line.unitMsr="UNID";
+    line.whsCode="S2TGU";
     line.taxPrcnt=15;
     line.quantity=100;
-    shareService.invoice.setLine(line);
-    /*
-    line=new DocumentLines(appSettings);
+    
+    shareService.invoice.lines.add(line);
+    
+    
+    line=new DocumentLine(appSettings);
     line.itemCode="12030007";
     line.itemName="VARILLA HIERRO DEF.3/8 x 9 MTS GRADO-40";
     line.price=180;
+    line.unitMsr="UNID";
+    line.whsCode="S2TGU";
     line.taxPrcnt=15;
     line.quantity=20;
-    shareService.invoice.setLine(line);
-
+    shareService.invoice.lines.add(line);
+    //console.log(shareService.invoice.lines[0]);
+    //console.log(shareService.invoice.lines[0].itemCode);
+    /*
     line=new DocumentLines(appSettings);
     line.itemCode="12030004";
     line.itemName="VARILLA HIERRO DEF.4/8 x 10 MTS GRADO-40";

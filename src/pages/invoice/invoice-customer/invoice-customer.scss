@@ -1,7 +1,9 @@
 page-invoice-customer {
-    ion-title{
-        ion-icon{
-            font-size: 70pt;
+    ion-content{
+        ion-title{
+            ion-icon.details-icon{
+                font-size: 60pt;
+            }   
         }
     }
 }

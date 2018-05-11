@@ -60,7 +60,8 @@ export interface ITerminalConfig{
     salesPerson:{id:number,name:string},
     wareHouse:{id:string,name:string},
     priceList:{id:number,name:string},
-    series:Array<{objectCode:string,id:number,name:string}>   
+    series:Array<{objectCode:string,id:number,name:string}>,
+    pricesWithTax:boolean,   
 }
 
 export interface ISelectList{

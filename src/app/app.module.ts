@@ -27,6 +27,7 @@ import { SelectSearchableModule } from '../components/select-searchable/select-s
 import { InvoiceCustomerPage } from '../pages/invoice/invoice-customer/invoice-customer';
 import { InvoiceItemPage } from '../pages/invoice/invoice-item/invoice-item';
 import { CustomerSearchPage } from '../pages/customer-search/customer-search';
+import { ItemDetailsPage } from '../pages/item-details/item-details';
 //import { SelectSearchablePage } from '../components/select-searchable/select-searchable-page/select-searchable';
 //import {Page2} from '../pages/page2/page2';
 
@@ -42,6 +43,7 @@ import { CustomerSearchPage } from '../pages/customer-search/customer-search';
     InvoiceDetailsPage,
     InvoiceCustomerPage,
     InvoiceItemPage,
+    ItemDetailsPage,
     CustomerSearchPage
 
   ],
@@ -66,6 +68,7 @@ import { CustomerSearchPage } from '../pages/customer-search/customer-search';
     InvoiceDetailsPage,
     InvoiceCustomerPage,
     InvoiceItemPage,
+    ItemDetailsPage,
     CustomerSearchPage
   ],
   
