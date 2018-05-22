@@ -206,3 +206,93 @@ export class DocumentLines{
     value1(){return 11111}
     [Symbol.iterator](){return this._lines.values()};
 }
+
+export class Payment{
+    series:number;
+    docNum:number;
+    docDate:Date;
+    currency:string;
+    cardCode:string;
+    cardName:string;
+    cashSum:number;
+    transferSum:number;
+    
+    private _paidSum:number;
+    private _checkSum:number;
+    private _creditSum:number;
+    private _checks:[{checkDate:Date,
+                      checkNo:Date,
+                      bankCode:number,
+                      account:string,
+                      checkSum:number
+                     }];
+    private _creditcards:[{creditDate:Date,
+        creditCardNo:Date,
+        bankCode:number,
+        idNo:string,
+        voucherNo:string,
+        phone:string,
+        checkSum:number
+    }];
+
+    private proxyChecks;
+    private proxyCreditCard;
+
+    constructor(appSetting:AppSettings){
+        let parent=this;
+
+        Object.defineProperty(this._checks, 'add', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function(line){
+                parent._checkSum+=line.checkSum;                
+                parent.proxyChecks.push(line);
+            }
+          }); 
+        
+          Object.defineProperty(this._checks, 'remove', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function(index){
+                let line=parent.proxyChecks[index];
+                parent._checkSum-=line.checkSum;                                
+                parent.proxyChecks.splice(index,1);
+            }
+          });
+
+          Object.defineProperty(this._creditcards, 'add', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function(line){
+                parent._creditSum+=line.creditSum;                
+                parent.proxyCreditCard.push(line);
+            }
+          }); 
+        
+          Object.defineProperty(this._creditcards, 'remove', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function(index){
+                let line=parent.proxyCreditCard[index];
+                parent._creditSum-=line.creditSum;                                
+                parent.proxyCreditCard.splice(index,1);
+            }
+          });
+    }
+
+    get paidSum():number{
+        return this._paidSum;
+    }
+
+    get checkSum():number{
+        return this._checkSum;
+    }
+
+    get creditSum():number{
+        return this._creditSum;
+    }
+}
