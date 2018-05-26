@@ -47,7 +47,7 @@ export interface ICustomers{
     RFC:string;
     groupNum:number;
     phone:string;
-    email:string;        
+    email:string;
     country:string;
     state:string;
     address:string;
@@ -55,16 +55,16 @@ export interface ICustomers{
 }
 
 export interface ITerminalConfig{
-    store:{id:string,name:string},
-    customer:ICustomers,
-    salesPerson:{id:number,name:string},
-    wareHouse:{id:string,name:string},
-    priceList:{id:number,name:string},
-    series:Array<{objectCode:string,id:number,name:string}>,
-    pricesWithTax:boolean,   
+    store:{id:string,name:string};
+    customer:ICustomers;
+    salesPerson:{id:number,name:string};
+    wareHouse:{id:string,name:string};
+    priceList:{id:number,name:string};
+    series:Array<{objectCode:string,id:number,name:string}>;
+    pricesWithTax:boolean
 }
 
 export interface ISelectList{
-    id:number,
+    id:number;
     name:string 
 }

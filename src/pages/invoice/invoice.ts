@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DocumentLine, Documents } from '../../class/app-objects';
+import { DocumentLine, Documents, Payment } from '../../class/app-objects';
 import { AppSettings } from '../../providers/settings';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
@@ -27,6 +27,7 @@ export class InvoicePage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public appSettings:AppSettings,shareService:ShareService) {
     shareService.invoice=new Documents(appSettings,shareService);
+    shareService.payment=new Payment(appSettings);
 
     let line:DocumentLine=new DocumentLine(appSettings);
     line.itemCode="13010001";

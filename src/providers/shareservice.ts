@@ -1,17 +1,19 @@
 import {Injectable, group} from '@angular/core';
-import { Documents } from '../class/app-objects';
+import { Documents, Payment } from '../class/app-objects';
 import { AppSettings } from './settings';
 import { ITerminalConfig, ISelectList } from '../interfaces/app-interfaces';
 
 @Injectable()
 export class ShareService{
     invoice:Documents;
+    payment:Payment;
     salesPersons:Array<ISelectList>;
     pricesList:Array<ISelectList>;
     paymentTerms:Array<ISelectList>;    
     wareHouses:Array<string>;
     countries:Array<{id:string,name:string}>;
     terminalConfig:ITerminalConfig;
+    paymentMethods:Array<{id:string,name:string,type:string,giveChange:string}>;
 
     constructor(private appSettings:AppSettings){
         this.pricesList=[{id:1,name:"01-Precios Detalle con ISV"},
@@ -66,6 +68,12 @@ export class ShareService{
                     {objectCode:"13",id:58,name:"S2TGUCRE"}],
             pricesWithTax:true            
         }
-                      
+        
+        this.paymentMethods=[{id:"CHE",name:"CHEQUES",type:"C",giveChange:"N"},
+                            {id:"EFE",name:"EFECTIVO",type:"E",giveChange:"Y"},
+                            {id:"DEV",name:"DEVOLUCION",type:"D",giveChange:"N"},
+                            {id:"TAR",name:"TARJETA DE CRÉDITO",type:"T",giveChange:"N"},
+                            {id:"SCR",name:"STORE CREDIT",type:"O",giveChange:"N"}                            
+                            ];
     }
 }

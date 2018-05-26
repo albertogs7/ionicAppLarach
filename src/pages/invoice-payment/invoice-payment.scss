@@ -1,3 +1,11 @@
 page-invoice-payment {
+    h1.total{
+        font-size: 16pt;
+        color:color($colors,primary);   
+    }
 
+    h1.paidsum{
+        font-size: 16pt;
+        color:color($colors,green);   
+    }
 }

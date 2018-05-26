@@ -7,9 +7,26 @@
 <ion-header>
   <ion-navbar>
   </ion-navbar>
-  <p>invoice.currency<h1>invoice.docTotal</h1></p>
-  <p>payment.currency<h1>invoice.paidSum</h1></p>
+    <div>{{invoice.currency}}<h1 class="total">{{invoice.docTotal}}</h1></div>
+    <div>{{invoice.currency}}<h1 class="paidsum">{{payment.paidSum | number}}</h1><ion-icon name="arrow-dropright-circle"></ion-icon></div>    
 </ion-header>
-<ion-content>
-  
+<ion-content>    
+  <ion-list>
+      <button ion-item detail-none (click)="paymentDetails(item.code,item.type)" *ngFor="let item of shareService.paymentMethods">
+        <div [ngSwitch]="item.type">
+            <ion-grid>
+              <ion-row>
+                <ion-col col-2>
+                  <ion-icon *ngSwitchCase="T" name="card"></ion-icon>
+                  <ion-icon *ngSwitchCase="C" name="cash"></ion-icon>
+                  <ion-icon *ngSwitchCase="O" name="information"></ion-icon>
+                  <ion-icon *ngSwitchCase="D" name="return-left"></ion-icon>
+                  <ion-icon *ngSwitchDefault name="ios-usd"></ion-icon>
+                </ion-col>
+                <ion-col col-10>{{item.name}}</ion-col>                
+              </ion-row>
+            </ion-grid>      
+        </div>        
+      </button>
+  </ion-list>
 </ion-content>

@@ -12,8 +12,7 @@ enum Property{
     QUANTITY,
 }
 
-export class Documents {
-    
+export class Documents {    
     customer:ICustomers;
     numAtCard:string;
     docNum:number;
@@ -214,32 +213,70 @@ export class Payment{
     currency:string;
     cardCode:string;
     cardName:string;
-    cashSum:number;
-    transferSum:number;
+    cashSum:number=0;
+    transferSum:number=0;
     
-    private _paidSum:number;
-    private _checkSum:number;
-    private _creditSum:number;
-    private _checks:[{checkDate:Date,
+    private _paidSum:number=0;
+    private _checkSum:number=0;
+    private _creditSum:number=0;
+    private _checks:Array<{checkDate:Date,
                       checkNo:Date,
                       bankCode:number,
                       account:string,
                       checkSum:number
-                     }];
-    private _creditcards:[{creditDate:Date,
+                     }>=[];
+    private _creditcards:Array<{creditDate:Date,
         creditCardNo:Date,
         bankCode:number,
         idNo:string,
         voucherNo:string,
         phone:string,
         checkSum:number
-    }];
+    }>=[];
+
+    private parent=this;
+    private proxyHandler = {
+        //parent:this,
+        proxyChild:{
+            parent:this.parent,            
+            set: function(target, prop, value, receiver) {                                                        
+                switch(prop){                                  
+                    case "checkSum":                    
+                        this.parent._checkSum-=target["checkSum"];
+                        target[prop] = value;                
+                        this.parent._checkSum+=target["checkSum"];
+                        break;
+
+                    case "creditSum":
+                        this.parent._creditSum-=target["creditSum"];
+                        target[prop] = value;                
+                        this.parent._creditSum+=target["creditSum"];
+                        break;                                        
+                default:
+                    target[prop] = value;
+                    break;
+                }             
+                return true;
+            }            
+        },
+        set: function(target, prop,value,receiver) {                                                
+            if (typeof value==="object" && target[prop]===undefined) {
+                target[prop]=new Proxy(value,this.proxyChild);                  
+            }
+            else target[prop]=value;
+            
+            return true;
+        },        
+    };
 
     private proxyChecks;
     private proxyCreditCard;
 
     constructor(appSetting:AppSettings){
         let parent=this;
+
+        this.proxyChecks=new Proxy(this._checks,this.proxyHandler);
+        this.proxyCreditCard=new Proxy(this._creditcards,this.proxyHandler);
 
         Object.defineProperty(this._checks, 'add', {
             enumerable: false,
@@ -257,7 +294,7 @@ export class Payment{
             writable: false,
             value: function(index){
                 let line=parent.proxyChecks[index];
-                parent._checkSum-=line.checkSum;                                
+                parent._checkSum-=line.checkSum;                          
                 parent.proxyChecks.splice(index,1);
             }
           });

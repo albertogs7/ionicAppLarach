@@ -74,7 +74,7 @@
       </ion-col>
       <ion-col col-5 class="total">
           TOTAL
-          <ion-row><button ion-button clear color="light" block class="total">{{document.docTotal | currency:'L':'code'}}</button></ion-row>
+          <ion-row><button ion-button clear (click)="goToPayment()" color="light" block class="total">{{document.docTotal | currency:'L':'code'}}</button></ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>        

@@ -28,6 +28,8 @@ import { InvoiceCustomerPage } from '../pages/invoice/invoice-customer/invoice-c
 import { InvoiceItemPage } from '../pages/invoice/invoice-item/invoice-item';
 import { CustomerSearchPage } from '../pages/customer-search/customer-search';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
+import { InvoicePaymentPage } from '../pages/invoice-payment/invoice-payment';
+import { PaymentDetailsPage } from '../pages/payment-details/payment-details';
 //import { SelectSearchablePage } from '../components/select-searchable/select-searchable-page/select-searchable';
 //import {Page2} from '../pages/page2/page2';
 
@@ -42,9 +44,11 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
     InvoiceContentPage,
     InvoiceDetailsPage,
     InvoiceCustomerPage,
+    InvoicePaymentPage,
     InvoiceItemPage,
     ItemDetailsPage,
-    CustomerSearchPage
+    CustomerSearchPage,
+    PaymentDetailsPage
 
   ],
   imports: [
@@ -67,9 +71,11 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
     InvoiceContentPage,
     InvoiceDetailsPage,
     InvoiceCustomerPage,
+    InvoicePaymentPage,
     InvoiceItemPage,
     ItemDetailsPage,
-    CustomerSearchPage
+    CustomerSearchPage,
+    PaymentDetailsPage
   ],
   
   providers: [

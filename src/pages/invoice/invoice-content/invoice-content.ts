@@ -6,6 +6,7 @@ import { ShareService } from '../../../providers/shareservice';
 import { InvoiceCustomerPage } from '../invoice-customer/invoice-customer';
 import { ItemDetailsPage } from '../../item-details/item-details';
 import { IDocumentLines } from '../../../interfaces/app-interfaces';
+import { InvoicePaymentPage } from '../../invoice-payment/invoice-payment';
 
 /**
  * Generated class for the InvoiceContentPage page.
@@ -45,5 +46,9 @@ export class InvoiceContentPage {
 
   removeLine(index:number){    
     this.document.lines.remove(index);    
+  }
+
+  goToPayment(){
+    this.navCtrl.push(InvoicePaymentPage);
   }
 }

@@ -7,9 +7,21 @@ export interface ICustomerItem{
     RFC:string;
     PymntGroup:string;
     Phone1:string;
-    Email:string;        
+    Email:string;      
     CreditLimit:number;
     GroupName:string;
+}
+
+export interface IItemsItem{
+    ItemCode:string;
+    ItemName:string;
+    FrgnName:string;
+    ItmsGrpNam:string;
+    VATLiable:string;    
+    Currency:string;
+    Price:number;
+    CardCode:string;
+    OnHand:number;    
 }
 
 @Injectable()
@@ -44,6 +56,22 @@ export class DataService{
         return new Observable((observer)=>{            
             let records=results.filter(item=>{              
                             return item.CardName.toLowerCase().indexOf(keyword.toLowerCase())>-1;
+                        });                           
+            observer.next(records);
+            observer.complete();
+            });
+    }
+
+    getItems$(keyword:string): Observable<IItemsItem[]> { //Resultados simulando obtener los datos de un http api con observable        
+        let results:IItemsItem[]=[{ItemCode:"01010001",ItemName:"AVELLANADOR 211-12MM (1/2) (BROCA 5 CORTES P/MET) (S)",FrgnName:"(11452 0012)  Comentario",ItmsGrpNam:"0101-CARPINT.BROCAS",VATLiable:"Y",Currency:"L.",Price:100,CardCode:"P30048",OnHand:1},
+                                {ItemCode:"01010003",ItemName:"BROCA P/CONCRETO IW958 3/4-PLG. (19MM) IRWIN EXTRA LGA.",FrgnName:"MASONRY DRILL BIT 400x19MM",ItmsGrpNam:"0106-ALBAÑIL.ACC.REP",VATLiable:"Y",Currency:"L.",Price:100,CardCode:"P30231",OnHand:13},
+                                {ItemCode:"01010004",ItemName:"BROCA P/MADERA 604-100-1/4 PALETA",FrgnName:"TIMBERLINE (PLANA DE ACERO)",ItmsGrpNam:"0101-CARPINT.BROCAS",VATLiable:"Y",Currency:"L.",Price:100,CardCode:"P30007",OnHand:5},
+                                {ItemCode:"01010005",ItemName:"BROCA P/ROUTER 45202 3/16x1/4 CARB.TUNGSTENO",FrgnName:null,ItmsGrpNam:"0101-CARPINT.BROCAS",VATLiable:"Y",Currency:"L.",Price:100,CardCode:"P30007",OnHand:5},
+                                ];
+
+        return new Observable((observer)=>{            
+            let records=results.filter(item=>{              
+                            return item.ItemName.toLowerCase().indexOf(keyword.toLowerCase())>-1;
                         });                           
             observer.next(records);
             observer.complete();
