@@ -1,11 +1,37 @@
 page-invoice-payment {
-    h1.total{
-        font-size: 16pt;
-        color:color($colors,primary);   
-    }
-
-    h1.paidsum{
-        font-size: 16pt;
-        color:color($colors,green);   
-    }
+    ion-header{
+        background-color: color($colors,primary);
+        button.button-outline-md{
+            color:white;
+            border-color:white;
+        }
+        p{
+            text-align: center;
+            margin-bottom: 0px;
+            color:whitesmoke;
+        }
+        h1{
+            font-size: 50pt;
+            text-align: center;
+            margin: 0;
+            transform: scale(.8, 1);
+            font-weight: normal;
+            p {
+                vertical-align:top;
+                font-size: 12pt;
+                color: whitesmoke;
+                display: inline-block;
+            }        
+        }
+        h1.total{    
+            color:white;
+        }
+        h1.paidsum{    
+            color:color($colors,green);
+        }
+        ion-icon{
+            font-size:25pt;
+            color:color($colors,dark);
+        }
+    }      
 }

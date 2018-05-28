@@ -58,6 +58,7 @@ export class ShareService{
                         {id:"NC",name:"Nicaragua"}];
                         
         this.terminalConfig={
+            currency:"L.",
             store:{id:"S02",name:"SALA #2"},
             customer:{cardCode:"C9999S02",cardName:"CONSUMIDOR FINAL",
                       RFC:"000000000000",groupNum:1,phone:"",email:"sistemas@larachycia.com",state:"Tegucigalpa",country:"HN",address:"Col. Miramontes, Calle la Salud",imagePath:"assets/imgs/male-user.png"},

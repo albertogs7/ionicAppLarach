@@ -55,6 +55,7 @@ export interface ICustomers{
 }
 
 export interface ITerminalConfig{
+    currency:string;
     store:{id:string,name:string};
     customer:ICustomers;
     salesPerson:{id:number,name:string};

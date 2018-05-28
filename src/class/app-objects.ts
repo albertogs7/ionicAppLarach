@@ -22,6 +22,7 @@ export class Documents {
     fiscal4:string;
     docDate:Date;
     docDueDate:Date;
+    currency:string;
     slpCode:number;
     groupNum:number;
     priceList:number;    
@@ -77,7 +78,8 @@ export class Documents {
     private proxyLines=new Proxy(this._lines,this.proxyHandler);;
 
     constructor(public appSettings:AppSettings,private shareService:ShareService){
-        this.customer=shareService.terminalConfig.customer;        
+        this.customer=shareService.terminalConfig.customer;
+        this.currency=shareService.terminalConfig.currency;        
         this.slpCode=shareService.terminalConfig.salesPerson.id;
         this.priceList=shareService.terminalConfig.priceList.id;
         this.groupNum=shareService.terminalConfig.customer.groupNum;
@@ -272,9 +274,9 @@ export class Payment{
     private proxyChecks;
     private proxyCreditCard;
 
-    constructor(appSetting:AppSettings){
+    constructor(appSetting:AppSettings,shareService:ShareService){
         let parent=this;
-
+        this.currency=shareService.terminalConfig.currency;
         this.proxyChecks=new Proxy(this._checks,this.proxyHandler);
         this.proxyCreditCard=new Proxy(this._creditcards,this.proxyHandler);
 

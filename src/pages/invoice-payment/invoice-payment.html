@@ -7,8 +7,15 @@
 <ion-header>
   <ion-navbar>
   </ion-navbar>
-    <div>{{invoice.currency}}<h1 class="total">{{invoice.docTotal}}</h1></div>
-    <div>{{invoice.currency}}<h1 class="paidsum">{{payment.paidSum | number}}</h1><ion-icon name="arrow-dropright-circle"></ion-icon></div>    
+    <br>
+    <p>TOTAL</p>
+    <h1 class="total"><p>{{invoice.currency}}</p>{{invoice.docTotal | number:'1.2-2'}}</h1>
+    <p>PAGADO</p>
+    <h1 class="paidsum"><p>{{payment.currency}}</p>{{payment.paidSum | number:'1.2-2'}}</h1>
+    <br>
+    <!--<div style="width: 100%;text-align:right;padding-right: 5px;">-->   
+      <button ion-button outline block>Finalizar</button>
+    <!--</div>-->
 </ion-header>
 <ion-content>    
   <ion-list>

@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MainPage } from '../pages/main/main';
 import { LoginPage } from '../pages/login/login';
 import { InvoicePage } from '../pages/invoice/invoice';
+import { InvoicePaymentPage } from '../pages/invoice-payment/invoice-payment';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { InvoicePage } from '../pages/invoice/invoice';
 
 @Injectable()
 export class MyApp {  
-  rootPage:any = InvoicePage;    
+  rootPage:any = InvoicePaymentPage;    
   
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {        
     platform.ready().then(() => {      
